@@ -1,0 +1,778 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Linux软件安装 | 啾啾子的小博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="yuanLier">
+    
+    <meta name="description" itemprop="description" content="来自不想学习只想用然后被揍回现实的小咸鱼；&lt;br&gt;主要记录一下Linux中软件的安装与管理啦">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="/" />
+    <meta name="twitter:title" content="Linux软件安装 | 啾啾子的小博客" />
+      
+        <meta name="twitter:description" content="来自不想学习只想用然后被揍回现实的小咸鱼；&lt;br&gt;主要记录一下Linux中软件的安装与管理啦" />
+      
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="啾啾子的小博客" title="啾啾子的小博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="啾啾子的小博客">啾啾子的小博客</a></h1>
+				<h2 class="blog-motto">又名 啾啾子·不知道瞎写了些啥玩意·的小博客</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/09/20/Linux软件安装/" title="Linux软件安装" itemprop="url">Linux软件安装</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="yuanLier">yuanLier</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-09-20T15:01:52.000Z" itemprop="datePublished">2018-09-20</time>
+    Updated:<time datetime="2018-10-05T10:04:35.300Z" itemprop="dateModified">2018-10-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux软件包分类"><span class="toc-number">1.</span> <span class="toc-text">Linux软件包分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RPM命令管理"><span class="toc-number">2.</span> <span class="toc-text">RPM命令管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yum在线安装"><span class="toc-number">3.</span> <span class="toc-text">yum在线安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码包安装"><span class="toc-number">4.</span> <span class="toc-text">源码包安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#脚本安装包"><span class="toc-number">5.</span> <span class="toc-text">脚本安装包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#藏在最后"><span class="toc-number">6.</span> <span class="toc-text">藏在最后</span></a></li></ol>
+		</div>
+		
+		<h2 id="Linux软件包分类"><a href="#Linux软件包分类" class="headerlink" title="Linux软件包分类"></a>Linux软件包分类</h2><ul>
+<li><strong>源码包</strong><ul>
+<li>优点 ：<ul>
+<li>开源；有能力可以自己修改源代码</li>
+<li>可以自由选择所需的功能</li>
+<li>软件为编译安装；更适合自己的系统，更稳定高效</li>
+<li>卸载方便！！！</li>
+</ul>
+</li>
+<li>缺点 ：<ul>
+<li>安装步骤较多；在安装较大的软件集合时，容易出现拼写错误</li>
+<li>编译过程时间较长，安装比二进制安装时间长</li>
+<li>安装过程中要是报错了..就对我们这样的智障十分不友好</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>二进制包（RPM包）</strong><ul>
+<li>优点 ：<ul>
+<li>包管理系统简单，只需要几个命名就可以实现包的安装、升级、查询、卸载</li>
+<li>安装速度比源码包安装快得多</li>
+</ul>
+</li>
+<li>缺点 ：<ul>
+<li>经过编译，不再能够看到源码</li>
+<li>功能选择不如源码包灵活</li>
+<li>依赖性强</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>脚本安装包</strong><br>就是把复杂的安装过程写成了一个脚本，初学者可以通过执行脚本实现一键安装；但实际安装的还是源码包或二进制包<ul>
+<li>优点 ：<ul>
+<li>安装简单、快捷</li>
+</ul>
+</li>
+<li>缺点 ：<ul>
+<li>完全丧失了自定义性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="RPM命令管理"><a href="#RPM命令管理" class="headerlink" title="RPM命令管理"></a>RPM命令管理</h2><ul>
+<li><strong>RPM包在哪里？</strong><ul>
+<li>在系统光盘中的Packages包下啦！</li>
+<li>要怎么进入看到呢？<ul>
+<li>首先把光盘挂载过来 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180903134912821.png" alt=""></li>
+<li>然后进入这个挂载点，再进入Packages包 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180903135038808.png" alt=""></li>
+<li>ls一下就会看见所有的RPM包啦 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180903135126795.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>RPM包命名规则</strong><ul>
+<li>以 httpd-2.2.15-15.el6.centos.1.i686.rpm 为例<ul>
+<li>httpd 软件包名</li>
+<li>2.2.15 软件版本</li>
+<li>15 软件发布的次数</li>
+<li>el6.centos 适合的Linux平台</li>
+<li>i686 适合的硬件平台</li>
+<li>rpm rpm包的扩展名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>RPM包的依赖性</strong><ul>
+<li>树形依赖 ：a -&gt; b -&gt; c</li>
+<li>解决方案 ：先装 c 再装 b 再装 a</li>
+<li>环形依赖 ：a -&gt; b -&gt; c -&gt; a</li>
+<li>解决方案 ：把这几个包同时装上</li>
+<li>模块依赖 ：依赖一个文件（一般以 so.数字 结尾）</li>
+<li>解决方案 ：把这个文件所在的包装上先</li>
+<li>注 ：可在 <a href="http://www.rpmfind.net" target="_blank" rel="noopener">www.rpmfind.net</a> 中进行查询</li>
+</ul>
+</li>
+<li><strong>包全名与包名</strong><ul>
+<li>包全名 ：<ul>
+<li>在操作的包是没有安装的软件包时使用</li>
+<li>且需要注意路径（使用绝对路径或进入Packages）</li>
+</ul>
+</li>
+<li>包名 ：<ul>
+<li>在操作的是已经安装的软件包时使用</li>
+<li>注 ：本质是搜索 /var/lib/rpm/ 中的数据库</li>
+<li>所以一般不需要特别注意路径</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>RPM包的安装</strong><ul>
+<li>基本格式 ：rpm -ivh 包全名</li>
+<li>选项 ：<ul>
+<li>-i install 安装</li>
+<li>-v verbose 显示详细信息</li>
+<li>-h hash 显示进度</li>
+<li>–nodeps 不检测依赖性</li>
+</ul>
+</li>
+<li>注意 ：但–nodeps不推荐使用</li>
+<li>让我们走个流程看一下 ：</li>
+<li>首先来装一个Apache –&gt; 先让它自动补一下<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180903151947748.png" alt=""></li>
+<li>一般会先装第一个，也就是主安装包 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180903153403629.png" alt=""></li>
+<li>但是没装上..为什么呢？差依赖 –&gt;<br>那就先装它的依赖包试试 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-2018090315252969.png" alt=""></li>
+<li>但是还是没装上..还差依赖 –&gt;<br>注意 apr-util = 其实指的就是它的版本号<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180903152554369.png" alt=""></li>
+<li>再装 –&gt; 还是没装上 –&gt;<br>这次差的是依赖文件 –&gt; 那就装它所在的安装包<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180903153001199.png" alt=""></li>
+<li>假装查过之后..好！终于装上了！<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180903153317612.png" alt=""></li>
+<li>然鹅这只是装上了最底层的一个依赖包而已..<br>让我们再一层一层装回去 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-2018090315421778.png" alt=""></li>
+<li>最后是Apache的主安装包！<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180903154254441.png" alt=""></li>
+<li>所以说它为什么叕报错了呢..因为刚刚只装好了一条线上的依赖鸭..还有另N条线 嘤！让我们再试一次 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180903154431998.png" alt=""></li>
+<li>然后就成功啦！成功装上了Apache..的主安装包 –&gt;<br>也就是说，还有不主的安装包要装..那就装叭 嘤 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180903155204862.png" alt=""><br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180903155219835.png" alt=""></li>
+<li>好了，最后还剩一个httpd-devel，听说它有八个依赖包..就..就不装了嘤 QAQ 等着后面讲到yum再装叭 嗷呜</li>
+</ul>
+</li>
+<li><strong>RPM包的升级</strong><ul>
+<li>基本格式 ：rpm -Uvh 包全名</li>
+<li>选项 ：<ul>
+<li>-U update 升级</li>
+</ul>
+</li>
+<li>注意 ：<ul>
+<li>后面跟的是包全名不是包名</li>
+<li>其实也能当安装命令用</li>
+<li>但没啥事还是分开用了啦</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>RPM包的卸载</strong><ul>
+<li>基本格式 ：rpm -e 包名</li>
+<li>选项 ：<ul>
+<li>-e erase 卸载</li>
+<li>–nodeps 不检查依赖性</li>
+</ul>
+</li>
+<li>注意 ：<ul>
+<li>实际是去 /var/lib/rpm/ 中寻找对应安装包</li>
+<li>所以用包名就可以了，并且不用太在意路径</li>
+<li>要按与安装相反的依赖顺序卸载 嗷呜</li>
+<li>所以 –nnodeps 依旧不推荐使用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>RPM包的查询</strong><ul>
+<li>查询是否安装 ：<ul>
+<li>基本格式 ：rpm -q 包名</li>
+<li>选项 ：-q query 查询</li>
+<li>如果是已经装过的 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904113216316.png" alt=""></li>
+<li>如果是没有装过的 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904113236764.png" alt=""></li>
+</ul>
+</li>
+<li>查询所有已经安装的RPM包 ：<ul>
+<li>基本格式 ：rpm -qa</li>
+<li>选项 ：-a all 所有的</li>
+<li>比如这样 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904113443552.png" alt=""></li>
+</ul>
+</li>
+<li>通过管道符查询相关包 ：<ul>
+<li>比如 rpm -qa | grep httpd</li>
+<li>就会为你查询到所有包含httpd的RPM包 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904113724761.png" alt=""></li>
+</ul>
+</li>
+<li>查询已安装的软件包的详细信息 ：<ul>
+<li>基本格式 ：rpm -qi 包名</li>
+<li>选项 ：-i information 查询软件信息</li>
+<li>比如这样 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904115500344.png" alt=""></li>
+</ul>
+</li>
+<li>查询未安装的软件包的详细信息 ：<ul>
+<li>基本格式 ：rpm -qip 包全名</li>
+<li>选项 ：-p package 未安装的软件包</li>
+<li>比如这样（注意得是在目录下才行哦）：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904114546146.png" alt=""></li>
+</ul>
+</li>
+<li>查询软件包中的文件安装位置 ：<ul>
+<li>基本格式 ：rpm -ql(p) 包名(包全名)</li>
+<li>选项 ：-l list 列表</li>
+<li>比如这样 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904114949403.png" alt=""></li>
+<li>附一张传说中RPM包一般默认安装位置的图 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904115358550.png" alt=""></li>
+</ul>
+</li>
+<li>查询系统文件属于哪个RPM包 ：<ul>
+<li>基本格式 ：rpm -qf 系统文件名</li>
+<li>选项 ：-f file 查询文件属于哪个RPM包</li>
+<li>比如这样 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904115849565.png" alt=""></li>
+<li>当然如果这个文件不是通过RPM包装上的..<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904120133775.png" alt=""></li>
+</ul>
+</li>
+<li>查询软件包的依赖性 ：<ul>
+<li>rpm -qR(p) 包名(包全名)</li>
+<li>选项 ：-R requires 依赖性</li>
+<li>但它其实并没有什么实际用处，因为..<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904120545697.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>RPM包的校验</strong><ul>
+<li>基本格式 ：rpm -V 已安装的包名</li>
+<li>选项 ：<ul>
+<li>-V verify 校验</li>
+</ul>
+</li>
+<li>比如这样 ：–&gt; 但是会发现并没有什么动静<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904172350321.png" alt=""></li>
+<li>但如果我们在httpd某个文件中加一行注释..<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904172556307.png" alt=""></li>
+<li>就会发现有变化了！<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904172643107.png" alt=""></li>
+<li>那么验证内容中的八个信息具体指什么呢？<ul>
+<li>S 文件大小是否改变</li>
+<li>M 文件类型或权限是否改变</li>
+<li>5 文件内容是否改变</li>
+<li>D 设备的主从代码是否改变</li>
+<li>L 文件路径是否改变</li>
+<li>U 文件所有者是否改变</li>
+<li>G 文件的属组是否改变</li>
+<li>T 文件的修改时间是否改变</li>
+</ul>
+</li>
+<li>那后面那个c又是指什么呢？<ul>
+<li>c config file 配置文件</li>
+<li>d documentation 普通文档</li>
+<li>g ghost file 幽灵文件（就是指这个文件不应该被这个RPM包包含，也就是嗦！你该检查一下系统有没有粗什么事啦）</li>
+<li>L license file 授权文件</li>
+<li>r readme 描述文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>RPM包中文件提取</strong><ul>
+<li>基本格式 ：<ul>
+<li>rpm2cpio 包全名 | cpio -idv .文件绝对路径</li>
+</ul>
+</li>
+<li>选项 ：<ul>
+<li>-rpm2cpio 将rpm包转换为cpio格式的命令</li>
+<li>-cpio 这是一个标准工具，用来创建软件档案文件和从档案文件中提取文件的</li>
+</ul>
+</li>
+<li>用途 ：<ul>
+<li>用于不小心删了什么系统文件然后从它的rpm包中把这个文件再提取出来以防止系统崩溃什么的</li>
+<li>其实也可以直接把这个RPM包再装一遍</li>
+<li>其实我并看不太懂 但是还是要记一下 不能懒不能懒</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="yum在线安装"><a href="#yum在线安装" class="headerlink" title="yum在线安装"></a>yum在线安装</h2><ul>
+<li><strong>yum源文件</strong><ul>
+<li>让我们来看看系统默认的yum源文件放在哪 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904175051423.png" alt=""></li>
+<li>默认是第一个生效，让我们vi一下进去看看 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904175308579.png" alt=""></li>
+<li>那所以这里面写了点啥？哎算了还是截个图叭<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904175624510.png" alt=""></li>
+</ul>
+</li>
+<li><strong>光盘搭建本地yum源</strong><ul>
+<li>挂载光盘 ：<ul>
+<li>mkdir /mnt/cdrom</li>
+<li>mount /dev/sr0 /mnt/cdrom/</li>
+</ul>
+</li>
+<li>使网络yum源生效（即使第一个失效，使第三个生效）：<ul>
+<li>首先进入yum源目录 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904190850168.png" alt=""></li>
+<li>然后修改yum源文件的后缀名，使其失效 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904210328187.png" alt=""></li>
+<li>然后进入第三个文件，修改一下使其生效 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904210633566.png" alt=""></li>
+<li>最后再验证一下 –&gt;<br>输入 yum list，如果看见一堆c6-media，就说明成功啦 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904210809450.png" alt=""></li>
+</ul>
+</li>
+<li><strong>常用的yum命令</strong></li>
+<li>查询所有可用软件包列表 ：<ul>
+<li>基本格式 ：yum list</li>
+<li>比如说上面那样 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904210809450.png" alt=""></li>
+</ul>
+</li>
+<li>搜索服务器上素有和关键字相关的包 ：<ul>
+<li>基本格式 ：yum search 关键字</li>
+<li>比如说这样 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904214421996.png" alt=""></li>
+</ul>
+</li>
+<li>安装（没有包全名也没有路径要求啦！快乐！） ：<ul>
+<li>基本格式 ：yum -y install 包名</li>
+<li>选项 ：-y 自动回答yes</li>
+<li>比如说把上次没装完的Apache-devel装上 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904214944115.png" alt=""></li>
+<li>回车然后只需要等一会..啊简直不要太快乐 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-2018090421502933.png" alt=""></li>
+</ul>
+</li>
+<li>升级 ：<ul>
+<li>基本格式 ：yum -y update 包名</li>
+<li>当然你必须得有个更高版本的包</li>
+<li>and据说没啥事不要瞎升级</li>
+<li>所以这里就不举栗子啦 嗷呜~</li>
+</ul>
+</li>
+<li>卸载 ：<ul>
+<li>基本格式 ：yum -y remove 包名</li>
+<li>同样，没啥事不要瞎卸载，尤其不要用yum卸</li>
+<li>因为卸载的时候也是有依赖性的啦</li>
+<li>rpm还会确定一下，yum问都不问直接就帮你卸了</li>
+</ul>
+</li>
+<li><strong>yum软件组管理命令</strong></li>
+<li>列出所有可用的软件组列表 ：<ul>
+<li>基本格式 ：yum grouplist</li>
+<li>比如这样 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904221029137.png" alt=""></li>
+<li>但是有个问题 ：查的时候查出来中文很开心，但你装的时候不能输中文装鸭！怎么办呢！</li>
+<li>这个时候就可以把系统语系改成英文啦 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904232339307.png" alt=""></li>
+<li>然后等安装完了再改回来就好，比如这样 ：<br><img src="/2018/09/20/Linux软件安装/markdown-img-paste-20180904232355757.png" alt=""></li>
+</ul>
+</li>
+<li>安装软件组 ：<ul>
+<li>基本格式 ：yum groupinstall 软件组名</li>
+</ul>
+</li>
+<li>卸载指定软件组 ：<ul>
+<li>基本格式 ：yum groupremove 软件组名</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="源码包安装"><a href="#源码包安装" class="headerlink" title="源码包安装"></a>源码包安装</h2><ul>
+<li><strong>源码包和RPM包的区别</strong><ul>
+<li>安装之前 ：概念上的区别<ul>
+<li>详见..前面的 嘻嘻</li>
+</ul>
+</li>
+<li>安装之后 ：安装位置不同<ul>
+<li>RPM包 ：一般让它保持默认安装</li>
+<li>源码包 ：需要手动指定安装位置</li>
+</ul>
+</li>
+<li>注意注意 ：<ul>
+<li>源码包是没有卸载命令的</li>
+<li>所以一定要手动指定位置</li>
+<li>一般放在 /usr/local/软件名/ 下</li>
+<li>不然它会像RPM一样装的到处都是</li>
+<li>你要删还得一个包一个包找着删</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>源码包的<del>(云)</del>安装</strong><ul>
+<li>因为没WiFi了所以不装了 心疼流量嘤嘤嘤</li>
+<li>下面是源码包的云安装时间 ：</li>
+<li>安装注意事项 ：<ul>
+<li>源代码保存位置 ：/usr/local/src/</li>
+<li>软件安装位置 ：/usr/local/</li>
+<li>如何确定安装过程报错 ：<ul>
+<li>安装过程停止</li>
+<li>并出现error/warning/no等提示</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>源码包的安装过程 ：<ul>
+<li>下载源码包</li>
+<li>解压缩下载的源码包</li>
+<li>进入解压缩目录</li>
+<li>./configure 软件配置与检查 ：<ul>
+<li>定义需要的功能选项</li>
+<li>检测系统环境是否符合安装要求</li>
+<li>将上述信息写入Makefile文件</li>
+<li>注意一定要加上下面这个功能 ：</li>
+<li>./configure –prefix=路径</li>
+<li>用来指定安装位置</li>
+</ul>
+</li>
+<li>然后 ：make 编译<ul>
+<li>万一报错怎么办呢？像这样 ：</li>
+<li>make clean 清除刚刚编译的文件</li>
+</ul>
+</li>
+<li>最后 ：make install 安装</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="脚本安装包"><a href="#脚本安装包" class="headerlink" title="脚本安装包"></a>脚本安装包</h2><p>实际上还是源码包和RPM包</p>
+<ul>
+<li><strong>接下来依然是<del>(云)</del>安装时间</strong><ul>
+<li>算了这次连云都不想云了 嘤</li>
+</ul>
+</li>
+</ul>
+<h2 id="藏在最后"><a href="#藏在最后" class="headerlink" title="藏在最后"></a>藏在最后</h2><ul>
+<li>好我们的软件安装管理到此结束<del>（呸）</del></li>
+<li>虽然好像仿佛还是啥也不会？？？</li>
+<li>嗷呜~说好不偷懒结果又摸了</li>
+<li>算了算了以后要用到就滚回来再过一遍叭</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux合集/">Linux合集</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/09/20/Linux软件安装/" data-title="Linux软件安装 | 啾啾子的小博客" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2018/09/20/纸上谈反射/" title="纸上谈反射">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  纸上谈反射</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/09/20/Linux第二弹/"  title="Linux第二弹">
+ <strong>NEXT:</strong><br/> 
+ <span>Linux第二弹
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux软件包分类"><span class="toc-number">1.</span> <span class="toc-text">Linux软件包分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RPM命令管理"><span class="toc-number">2.</span> <span class="toc-text">RPM命令管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yum在线安装"><span class="toc-number">3.</span> <span class="toc-text">yum在线安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码包安装"><span class="toc-number">4.</span> <span class="toc-text">源码包安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#脚本安装包"><span class="toc-number">5.</span> <span class="toc-text">脚本安装包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#藏在最后"><span class="toc-number">6.</span> <span class="toc-text">藏在最后</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/Linux合集/" title="Linux合集">Linux合集<sup>4</sup></a></li>
+		
+			<li><a href="/categories/工具向整理/" title="工具向整理">工具向整理<sup>3</sup></a></li>
+		
+			<li><a href="/categories/数据库系列/" title="数据库系列">数据库系列<sup>1</sup></a></li>
+		
+			<li><a href="/categories/纸上谈系列/" title="纸上谈系列">纸上谈系列<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/JSP/" title="JSP">JSP<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>4</sup></a></li>
+		
+			<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+		
+			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/idea/" title="idea">idea<sup>1</sup></a></li>
+		
+			<li><a href="/tags/maven/" title="maven">maven<sup>1</sup></a></li>
+		
+			<li><a href="/tags/netty/" title="netty">netty<sup>1</sup></a></li>
+		
+			<li><a href="/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+		
+			<li><a href="/tags/servlet/" title="servlet">servlet<sup>1</sup></a></li>
+		
+			<li><a href="/tags/webSocket/" title="webSocket">webSocket<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://a-limon.github.io/pacman/hello/introducing-pacman-theme/#" target="_blank" title="Pacman">Pacman</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 我们的目标是！ <br/>
+			早睡早起，不掉头发！</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com//" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com//" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/yuanLier" target="_blank" title="github"></a>
+		
+		
+		<a href="https://www.facebook.com//" target="_blank" title="facebook"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="yuanLier">yuanLier</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:""};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"position":"right","width":120,"height":240},"mobile":{"show":true},"log":false});</script></body>
+</html>

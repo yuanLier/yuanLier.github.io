@@ -1,0 +1,885 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Linux常用命令 | 啾啾子的小博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="yuanLier">
+    
+    <meta name="description" itemprop="description" content="记录一下Linux中的常用命令">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="/" />
+    <meta name="twitter:title" content="Linux常用命令 | 啾啾子的小博客" />
+      
+        <meta name="twitter:description" content="记录一下Linux中的常用命令" />
+      
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="啾啾子的小博客" title="啾啾子的小博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="啾啾子的小博客">啾啾子的小博客</a></h1>
+				<h2 class="blog-motto">又名 啾啾子·不知道瞎写了些啥玩意·的小博客</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/09/20/Linux常用命令/" title="Linux常用命令" itemprop="url">Linux常用命令</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="yuanLier">yuanLier</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-09-20T14:43:42.000Z" itemprop="datePublished">2018-09-20</time>
+    Updated:<time datetime="2018-10-05T10:04:29.884Z" itemprop="dateModified">2018-10-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#命令基本格式"><span class="toc-number">1.</span> <span class="toc-text">命令基本格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-中常见目录的作用"><span class="toc-number">2.</span> <span class="toc-text">Linux 中常见目录的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查询目录中内容-：ls"><span class="toc-number">3.</span> <span class="toc-text">查询目录中内容 ：ls</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目录-文件处理命令"><span class="toc-number">4.</span> <span class="toc-text">目录 / 文件处理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件搜索命令"><span class="toc-number">5.</span> <span class="toc-text">文件搜索命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#帮助命令"><span class="toc-number">6.</span> <span class="toc-text">帮助命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#压缩与解压缩命令"><span class="toc-number">7.</span> <span class="toc-text">压缩与解压缩命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关机与重启命令"><span class="toc-number">8.</span> <span class="toc-text">关机与重启命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux中的挂载命令"><span class="toc-number">9.</span> <span class="toc-text">Linux中的挂载命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux中的用户登录查看命令"><span class="toc-number">10.</span> <span class="toc-text">Linux中的用户登录查看命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用快捷键"><span class="toc-number">11.</span> <span class="toc-text">常用快捷键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#杂七杂八的"><span class="toc-number">12.</span> <span class="toc-text">杂七杂八的</span></a></li></ol>
+		</div>
+		
+		<h2 id="命令基本格式"><a href="#命令基本格式" class="headerlink" title="命令基本格式"></a>命令基本格式</h2><ul>
+<li>[root@localhost ~]# :<ul>
+<li>root ：当前登录用户</li>
+<li>localhost ：主机名</li>
+<li>~ ：当前所在目录（家目录）</li>
+<li># ：超级用户(管理员)提示符</li>
+<li>$ ：普通用户提示符</li>
+</ul>
+</li>
+<li>命令格式 ：<ul>
+<li>命令 [选项] [参数]</li>
+</ul>
+</li>
+</ul>
+<h2 id="Linux-中常见目录的作用"><a href="#Linux-中常见目录的作用" class="headerlink" title="Linux 中常见目录的作用"></a>Linux 中常见目录的作用</h2><ul>
+<li>/ 根目录</li>
+<li>/bin 命令保存目录（所有用户均可使用）</li>
+<li>/boot 启动目录，用来启动相关文件</li>
+<li>/dev 设备文件保存目录</li>
+<li>/etc 配置文件保存目录（没事不要动它）</li>
+<li>/home 普通用户的家目录</li>
+<li>/lib 系统库保存目录（保存封装好的函数的）</li>
+<li>/misc &amp; /mnt &amp; /media ：<br>空目录，给系统挂载（即分配盘辐）用的</li>
+<li>/root 超级用户的家目录</li>
+<li>/tmp 临时目录（可以玩耍的那种）</li>
+<li>/sbin 命令保存目录（供超级用户使用的）</li>
+<li>/proc &amp; /sys ：<br>保存的是内存的过载点，不可直接操作<ul>
+<li>/usr 系统软件资源目录</li>
+<li>/usr/bin/系统命令（普通用户）</li>
+</ul>
+</li>
+<li>/usr/sbin/系统命令（超级用户）</li>
+<li>/var 系统相关文档内容</li>
+</ul>
+<h2 id="查询目录中内容-：ls"><a href="#查询目录中内容-：ls" class="headerlink" title="查询目录中内容 ：ls"></a>查询目录中内容 ：ls</h2><ul>
+<li>基本格式 ：ls [选项] [文件或目录]</li>
+<li>选项 ：<ul>
+<li><strong>-a ：显示所有文件(包括隐藏文件)</strong><br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727095849692.png" alt=""></li>
+<li><strong>-l ：显示详细信息</strong><br><strong>注：ls -l 可简写为 ll</strong><br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727093052924.png" alt=""><br>-rw-r–r– 代表文件权限：<ul>
+<li>第一个 - ：表示文件类型<ul>
+<li>- ：普通文件</li>
+<li>d ：目录文件</li>
+<li>l ：软链接文件(即快捷方式)</li>
+</ul>
+</li>
+<li>后九位 ：三三一组，代表身份与对应权限<ul>
+<li>用户身份依次为：<ul>
+<li>u所有者、g所属组、o其他人</li>
+</ul>
+</li>
+<li>各个身份所能拥有的权限有：<ul>
+<li>r:可读、w:可写、x:可执行</li>
+</ul>
+</li>
+<li>故 rw-r–r– 可解析为：<ul>
+<li>所有者拥有权限：rw-（读写）</li>
+<li>所属组拥有权限：r–（只读）</li>
+<li>其他人拥有权限：r–（只读）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>-d ：查看目录属性</strong><br>对比一下加 d 和不加 d ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727100004537.png" alt=""><br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727100030128.png" alt=""></li>
+<li><strong>-h ：人性化显示文件大小</strong><br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727095440186.png" alt=""></li>
+<li><strong>-i ：显示 iNode（i节点）</strong><br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727100150816.png" alt=""><br>第一串数字即文件的i节点（可以理解为 id 号）</li>
+</ul>
+</li>
+</ul>
+<h2 id="目录-文件处理命令"><a href="#目录-文件处理命令" class="headerlink" title="目录 / 文件处理命令"></a>目录 / 文件处理命令</h2><ul>
+<li><strong>建立目录 ：mkdir</strong><br>即 make directories<ul>
+<li>基本格式：mkdir -p [目录名]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727101126269.png" alt=""></li>
+<li>-p 递归创建（即同时创建多级目录）<br>比如说不加 -p 的时候想要直接创建，就会报错：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727101744876.png" alt=""><br>但加上 -p 之后就可以愉快地一起创建了：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-2018072710191889.png" alt=""></li>
+</ul>
+</li>
+<li><strong>切换所在目录 ：cd</strong><br>即 change directory<ul>
+<li>简化操作 ：<ul>
+<li>cd / cd ~ ：回到当前用户的家目录<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727104949824.png" alt=""></li>
+<li>cd - ：进入上次目录<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727105019741.png" alt=""></li>
+<li>cd .. ：进入上一级目录<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727105049843.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>查询当前所在目录的位置 ：pwd</strong><br>即 print working directory<ul>
+<li>超级简单的命令，没有引申，还是单独放张图<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-2018072711221661.png" alt=""></li>
+</ul>
+</li>
+<li><strong>删除空目录 ：rmdir</strong><br>即 remove empty directories<ul>
+<li>当你要删的是一个空目录的时候：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727113024514.png" alt=""></li>
+<li>然而如果你要删的这个并不空…<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727113324947.png" alt=""></li>
+<li>所以说它其实用的不多啦，我们一般用这个：</li>
+</ul>
+</li>
+<li><strong>删除文件或目录 ：rm</strong><br>即 remove<ul>
+<li>基本格式 ：rm -rf [文件或目录]</li>
+<li>选项：<ul>
+<li>-r 删除目录</li>
+<li>-f 强制</li>
+</ul>
+</li>
+<li>如果啥都不加只有一个 rm ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727114918346.png" alt=""><br>只能删文件不能删目录</li>
+<li>如果只加了 -r 没有加 -f ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727115034295.png" alt=""><br>它里面每个分支都会问你一遍，超级麻烦</li>
+<li>所以让我们之间 rm -rf ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727115400687.png" alt=""><br>好舒服了…..了???–&gt; 千万注意可别删错了（哭</li>
+<li>千万不要打 rm -rf /* 或者 rm -rf / 或者 rm -rf *</li>
+<li>千万不要打 rm -rf /* 或者 rm -rf / 或者 rm -rf *</li>
+<li>千万不要打 rm -rf /* 或者 rm -rf / 或者 rm -rf *</li>
+</ul>
+</li>
+<li><strong>复制命令 ：cp</strong><br>即 copy<ul>
+<li>基本格式 ：cp [选项] [原文件或目录] [目标目录]</li>
+<li>选项：<ul>
+<li>不加 ：只能复制文件<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727182503247.png" alt=""><br>或者给它重命名一下<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727182739883.png" alt=""></li>
+<li>-r ：是用来复制目录的<br>不加 -r 的时候想要复制目录，会报错<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-2018072718301378.png" alt=""><br>加上 -r 就可以正常复制啦<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727183044358.png" alt=""></li>
+<li>-p ：连带文件属性复制</li>
+<li>-d ：连带链接属性复制</li>
+<li>-a ：相当于 -pdr</li>
+</ul>
+</li>
+<li>一般来说只会用到 -r 和 -a，对比如下：<ul>
+<li>-r 或直接不加：（注意这个时间对比）<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727183240367.png" alt=""></li>
+<li>需要文件属性完全相同，包括时间等，用 -a<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727184343196.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>剪切或改名命令 ：mv</strong><br>即 move<ul>
+<li>基本格式 ：mv [原文件或目录] [目标目录]</li>
+<li>注 ：可以直接对目录进行操作，不需要加 -r</li>
+<li>mv 的两种使用场景 ：<ul>
+<li>若用在不同目录下 ：剪切<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727190906512.png" alt=""></li>
+<li>若用在同一目录下 ：改名<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727191308823.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>链接处理命令 ：ln</strong><br>即 link<ul>
+<li>基本格式 ：ln -s [原文件] [目标文件]</li>
+<li>选项 ：<ul>
+<li>-s 创建软链接</li>
+</ul>
+</li>
+<li>硬链接（不推荐使用）：<ul>
+<li>除了创建后文件的引用计数会加一之外，其他信息不改变且完全一样（当然文件名除外）<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-2018072816271250.png" alt=""></li>
+<li>不能跨分区创建：毕竟不能在别的楼给它修门</li>
+<li>删除原文件后依然可以通过硬链接打开该文件<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180728163645146.png" alt=""><br>查看文件内容，就会发现它是可以正常使用的：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180728170801869.png" alt=""></li>
+<li>只能对文件操作，不能创建目录的硬链接<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-2018072816213066.png" alt=""></li>
+</ul>
+</li>
+<li>软链接（推荐推荐推荐）：<ul>
+<li>几乎完全等同于 Windows 的快捷方式</li>
+<li>软链接：lrwxrwxrwx；创建后，文件的引用计数不变，且会有一个明确的箭头指向原文件<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180728165513595.png" alt=""></li>
+<li>允许创建对目录的软链接<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180728180453352.png" alt=""></li>
+<li>删除原文件后，无法通过软链接打开该文件<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180728170700571.png" alt=""></li>
+<li>敲黑板：创建的时候必须输绝对路径！绝对路径绝对路径绝对路径！！不然它就会变成这样：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180728164919931.png" alt=""></li>
+</ul>
+</li>
+<li>软硬链接最大的区别：<ul>
+<li>硬：拥有与原文件相同的i节点和存储block块，可看做同一个文件，相当于一间教室的两个门；</li>
+<li>软：拥有自己的i节点和block块，保存的是原文件的文件名和i节点号，而非实际的文件数据；</li>
+<li>一张图说明一切：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180728174213353.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件搜索命令"><a href="#文件搜索命令" class="headerlink" title="文件搜索命令"></a>文件搜索命令</h2><ul>
+<li><strong>快速文件搜索 ：locate</strong><ul>
+<li>基本格式 ：locate [文件名]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180728183000730.png" alt=""></li>
+<li>特点：<ul>
+<li>在后台数据库中搜索，速度比 find 要快</li>
+<li>只能搜索文件或目录，不能搜索其他的</li>
+<li>不能搜素到刚刚建立的文件，比如这样 ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180728184014545.png" alt=""><br>为啥子呢？因为它是在 /var/lib/mlocate（可能不叫mlocate，最好用 locate locate 查一下）这个数据库中进行搜索的，而数据库的更新是有定时的嘛（大概一天一更新），所以是找不到刚刚创建的文件的啦；一定想现在找到的话，可以用 updatedb 先强制更新一下，比如这样：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180728190248199.png" alt=""><br>但是发现还是查不出来╭(╯^╰)╮为什么呢 为什么呢 因为它在 /tmp 里面，不会被搜索(ノдヽ)<br>让我们换一个试试 ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180728231331580.png" alt=""><br>然后就可以成功找到啦 φ(&gt;ω&lt;*)</li>
+<li>那么问题来了：为啥在 /tmp 里面它就不搜索了呢？诶嘿~这就是 locate 的另一个特性了：<br>locate 是按照 /etc/updatedb.conf 这个配置文件来进行搜索的，让我们打开它看一下 ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180728233114378.png" alt=""><br>这写的是个啥？–&gt;四个连串的大写分别表示：<br>PRUNE_BIND_MOUNTS=”yes” :开启搜索限制<br>PRUNEFS= :搜索时，不搜索的文件系统<br>PRUNENAMES= :搜索时，不搜索的文件类型<br>PRUNEPATHS= :搜索时，不搜索的路径<br>（ 备注 ：PRUNE = prune = 删减，去除 ）<br>可以看到 /var/tmp 也在里面，所以就不搜索啦</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>命令搜索命令 ：whereis / which</strong><ul>
+<li>whereis 基本格式 ：whereis [选项] [命令名]</li>
+<li>选项 ：<ul>
+<li>不加：可执行文件可帮助文件均会查找<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729105911930.png" alt=""></li>
+<li>-b 只查找可执行文件<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729110314974.png" alt=""></li>
+<li>-m 只查找帮助文件<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-2018072911034096.png" alt=""></li>
+</ul>
+</li>
+<li>which 基本格式 ：which [文件名]</li>
+<li>特别的 ：<ul>
+<li>除了查找可执行文件外，还会查找它的别名<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729110925271.png" alt=""><br>当然没有别名就不会显示啦</li>
+</ul>
+</li>
+<li>last but not least ：<ul>
+<li>不是所有命令都可以找到的！比如说 cd：</li>
+<li>用 whereis 找的话 ：只找到了帮助文档<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729111236929.png" alt=""></li>
+<li>用 which 的话 ：出现了一串奇怪的东西<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729111313852.png" alt=""><br>那么这是什么呢！这是它的 PATH 环境变量啦(｀・ω・´)因为理论上来讲只有打绝对路径才能正常执行它嘛，但是这样就太麻烦了，所有系统帮你把相应的路径都保存起来了 (=´ω｀=)</li>
+<li>好了现在来说说为什么不能找到 cd ：<br>其实也很容易理解啦，因为 cd 属于 shell 自带的命令之一，而类似 ls / pwd 这种就属于外来的；它当然不能自己查找自己啦</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>文件搜索命令 ：find</strong><ul>
+<li>基本格式 ：find [搜索范围] [搜索条件]</li>
+<li>这个涉及到的东西太杂，举几个例子好了<ul>
+<li>find / -name install.log<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729155954817.png" alt=""><br>表示在根目录下按文件名查找 install.log<br>注意 ：不建议这样使用 –&gt; 搜索范围太大，会耗费大量系统资源；那为啥它只找到了一个而没找 install.log.syslog ？ –&gt; 因为 find 默认为绝对匹配，要想让它能模糊查询，得使用通配符</li>
+<li>可以在 find 查询时使用的通配符 ：<ul>
+<li>* ：匹配任意内容<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729161414997.png" alt=""><br>表示查询家目录下以 install.log 开头的</li>
+<li>? ：匹配任意一个字符<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729162050426.png" alt=""><br>表示查询文件名以ab开头且共三个字母的</li>
+<li>[] ：匹配任意一个括号内的字符<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729162353333.png" alt=""><br>表示查询以ab开头，第三个字母为c或d的</li>
+</ul>
+</li>
+<li>find /root -iname INStall.log<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-2018072916284488.png" alt=""><br>可以看到加上 i 之后就可以不区分大小写查找啦</li>
+<li>find /root -user root<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729163451687.png" alt=""><br>按所有者身份搜索（该条表示查询root目录下所有者为root的全部文件），那么这有啥用呢？我们一般会这样：</li>
+<li>find /root -nouser<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729164355366.png" alt=""><br>这找出来的是没有所有者的垃圾文件，我们就可以手动把它们清理掉啦ヾ(๑╹◡╹)ﾉ”但要注意的是，”位于 /sys or /proc 中由内核产生的文件” 和 “来自光盘/U盘/移动盘中的外来文件” 属于正常的无所有者文件，忽略它们就好啦，不用删的</li>
+<li>find /var/log/ -mtime +10<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729165049726.png" alt=""><br>表示查找10天前修改过的文件；一般用于对 log 信息的查找与整理（所以是在 /var/log/ 中搜索的），其他选项如下：<ul>
+<li>-10 ：最近10天内修改的文件</li>
+<li>10 ：10天前当天修改的文件</li>
+<li>+10 ：距今10天前修改的文件</li>
+<li>atime ：文件访问时间</li>
+<li>ctime ：文件属性改变</li>
+<li>mtime ：文件内容修改</li>
+</ul>
+</li>
+<li>find . -size 25k<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729170007410.png" alt=""><br>表示搜索当前目录下大小为25k的文件<br>find . -size -25k<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729170142522.png" alt=""><br>表示当前目录下大小小于25k的文件<br>注意：除了k是小写外，其他都大写（比如M）<br>另外：一定要带单位！不然系统默认的单位是扇区！25 = 25个扇区 = 25 * 512个字节！</li>
+<li>find -inum 658173<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729170729692.png" alt=""><br>表示根据 i 节点查找文件，和 ls -i 是对应的</li>
+<li>find /etc -size +20k -a -size -50k<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729171130925.png" alt=""><br>表示查找/etc/下，大于20k且小于50k的文件<ul>
+<li>-a –&gt; and –&gt; 逻辑与，两个条件都满足</li>
+<li>-o –&gt; or –&gt; 逻辑或，满足一个即可</li>
+</ul>
+</li>
+<li>那如果我们想对上面查到的一长串做统一操作呢？这时候就可以使用 -exec “命令” {} \; 啦：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729172545989.png" alt=""><br>表示查找/etc/下大于20k且小于50k的文件，并人性化显示它们的详细信息；最后的最后 ：注意{} 和 \; 之间是有空格的！空格！</li>
+</ul>
+</li>
+<li><strong>搜索字符串命令 ：grep</strong></li>
+<li>基本格式 ：grep [选项] [字符串] [文件名]</li>
+<li>选项 ：<ul>
+<li>不加 ：查找包含该字符串的对应行<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729174858620.png" alt=""></li>
+<li>-i ：忽略大小写</li>
+<li>-v ：排除指定字符串（即找出不含该字符串的）<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729175057799.png" alt=""></li>
+</ul>
+</li>
+<li>与 find 的区别 ：<ul>
+<li>find ：在系统中搜索符合条件的文件名</li>
+<li>grep ：在文件中搜索包含该字符串的行</li>
+<li>另：find 使用通配符进行匹配（完全匹配），而 prep 使用的是正则表达式（包含匹配）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><ul>
+<li><strong>基本帮助命令 ：man</strong><br>即 manual，文档<ul>
+<li>基本格式 ：man [选项] [命令]</li>
+<li>不加选项时的具体用法：<ul>
+<li>就比如说先查一下 ls 的 ：<br>输入 man ls，回车，就可以得到这个 ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729192636823.png" alt=""></li>
+<li>可是这个文档太多啦，要怎么快速找到需要的那个选项的信息呢？就可以直接在下面输入 /[选项]，就比如说下面这样 ：<br>输入 /-d 然后回车，就可以迅速找到 ls -d 的 ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729192934843.png" alt=""></li>
+<li>话说回来，回到这个文档第一行的话 ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729194056258.png" alt=""><br>这是干嘛的呢？让我们来 man 一下 man ：<br>退出后输入 man man，打开，往下翻一点，就会发现这个东西 ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729194325699.png" alt=""><br>翻译过来就是..给 man 查询的级别 ：<br>比如说1是”查看命令的帮助”等等，就不挨着写了</li>
+<li>那么要怎么查看命令拥有哪个级别的帮助呢？这时候就需要给 man 加上具体的选项了</li>
+</ul>
+</li>
+<li>选项：<ul>
+<li>-f ：查看命令拥有哪个级别的帮助<br>–&gt; 相当于 whatis [命令]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729195429447.png" alt=""><br>然后就可以通过 man [帮助级别] [命令] 来查看该帮助级别下的命令文档啦（不加帮助级别的话会默认显示数值最小哪个级别）<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729195846542.png" alt=""><br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729195822762.png" alt=""></li>
+<li>-k ：查看与该命令相关的所有帮助<br>–&gt; 相当于 apropos [命令]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729200223562.png" alt=""><br>用于..当你忘记这个命令叫啥只记得里面仿佛有个passwd的时候</li>
+</ul>
+</li>
+<li>最后的最后 ：同样，它无法获取shell的内部命令</li>
+</ul>
+</li>
+<li><strong>其他帮助命令</strong><ul>
+<li><strong>选项帮助：–help</strong><br>只显示该命令的选项帮助，而且！可以是中文的！<br>基本格式 ：[命令] –help<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729201839440.png" alt=""></li>
+<li><strong>内部命令帮助 ：help</strong><br>基本格式 ：help [shell内部命令]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729202159148.png" alt=""><br>注意它只能获取内部命令，否则会报错的！</li>
+<li>那要怎么判断是否为 shell 的内部命令呢？<br>我们可以用 whereis [命令]，比如这样 ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729202918324.png" alt=""><br>可以看到查询 ls 时给出了执行路径，而查询 cd 时没有；这就说明 ls 是一个外来命令，而 cd 是内部的</li>
+<li><strong>详细命令帮助 ：info</strong><br>基本格式 ：info [命令]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180729203039632.png" alt=""><br>但并不推荐使用，因为它相当于给了你一本书那么大的文档，还能按n/p前往下一小节/上一小节呢╭(╯^╰)╮</li>
+</ul>
+</li>
+</ul>
+<h2 id="压缩与解压缩命令"><a href="#压缩与解压缩命令" class="headerlink" title="压缩与解压缩命令"></a>压缩与解压缩命令</h2><ul>
+<li><strong>.zip 的压缩与解压缩</strong><ul>
+<li>压缩文件 ：zip [压缩文件名] [源文件]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730081151403.png" alt=""></li>
+<li>压缩目录 ：zip -r [压缩文件名] [源文件]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730081226480.png" alt=""></li>
+<li>备注备注 ：<ul>
+<li>其实也可以不带后缀 .zip，但这样会清楚一些</li>
+<li>压缩文件不一定比源文件小的（比如说源文件为空）：因为压缩的时候会有一定压缩格式的换算</li>
+<li>都是空文件的话会显示 stored 0%，没啥影响啦</li>
+<li>压缩之后会变红的哦（因为是软件包）</li>
+</ul>
+</li>
+<li>解压缩 ：unzip [压缩文件]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730082644686.png" alt=""><br>文件和目录都是直接解压就好了，但不能一起解压</li>
+</ul>
+</li>
+<li><strong>.gz 的压缩与解压缩</strong><ul>
+<li>压缩文件 ：gzip [源文件]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730084120944.png" alt=""><br>然而源文件会消失（也可以强行保留但是太麻烦了）</li>
+<li>压缩目录 ：gzip -r [目录]<br>首先创建一个包含三个文件的目录<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730084740114.png" alt=""><br>然后压缩，ls –&gt; 诶我的老婆怎么没被压？？？<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730084849922.png" alt=""><br>进入 laopo –&gt; 就会发现每个文件被单独压缩了<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730085031791.png" alt=""><br>所以说 gzip 只会去单独压缩目录下的每个子文件，但无法压缩目录本身，就hin麻烦</li>
+<li>解压缩文件 ：gzip -d [压缩文件]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730091249135.png" alt=""><br>或者像 zip 一样，用 gunzip [压缩文件]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730091400887.png" alt=""><br>还可以对目录解压，但是要记得加上 -r<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-2018073009171187.png" alt=""><br>同样的，解压后压缩文件会消失，只剩解压出来的那个</li>
+</ul>
+</li>
+<li><strong>.bz2 的压缩与解压缩</strong><ul>
+<li>不保留源文件 ：bzip2 [源文件]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730092442483.png" alt=""></li>
+<li>保留源文件 bzip2 -k [源文件]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730092501101.png" alt=""></li>
+<li>注意 ；bzip2 命令不能压缩目录</li>
+<li>解压缩文件 ：bunzip2 / bzip2 -d [压缩文件]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730093533872.png" alt=""><br>同样，加上 -k 会保留原压缩文件<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730093624659.png" alt=""></li>
+</ul>
+</li>
+<li><strong>.tar.gz / .tar.bz2 压缩格式（推荐）</strong><ul>
+<li>原理：将目录打包成 .tar 格式，再压缩为 .gz / .bz2</li>
+<li><strong>.tar.gz 的压缩与解压缩</strong><ul>
+<li>压缩 ：tar -zcvf [压缩包名] [源文件]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-2018073011153265.png" alt=""></li>
+<li>解压缩 ：tar -zxvf [压缩包名]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730111802227.png" alt=""></li>
+<li>注意 ：该压缩包名一般以 .tar.gz 结尾，便于区分；压缩与解压缩过程中，源文件均会予以保留</li>
+</ul>
+</li>
+<li><strong>.tar.bz2 的压缩与解压缩</strong><ul>
+<li>压缩 ：tar -jcvf [压缩包名] [源文件]<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730112120256.png" alt=""></li>
+<li>解压缩 ：tar -jxvf [压缩包名<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730112203556.png" alt=""></li>
+<li>注意 ：该压缩包名一般以 .tar.bz2 结尾，便于区分；压缩与解压缩过程中，源文件均会予以保留</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="关机与重启命令"><a href="#关机与重启命令" class="headerlink" title="关机与重启命令"></a>关机与重启命令</h2><ul>
+<li><strong>安全关机命令 ：shutdown</strong><ul>
+<li>基本格式 ：shutdown [选项] [时间]</li>
+<li>选项 ：<ul>
+<li>-h ：关机（避免对服务器采用远程关机）<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730165556555.png" alt=""><br>表示让它第二天05:20的时候关机；但是我们会发现，一旦输入这条命令，终端就不能正常使用了，怎么办呢？Ctrl + C ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-2018073016584074.png" alt=""><br>就可以取消掉定时关机的命令了 –&gt; 可这样感觉定时关机好像没啥用的样子，能不能让它在后台运行呢？加个 &amp; 就OK啦 ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730170209927.png" alt=""></li>
+<li>-c ：取消前一个关机命令<br>直接 shutdown -c，就能把前一个关机or重启命令终止掉啦 ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730170608579.png" alt=""></li>
+<li>-r ：重启（对服务器：推荐）<br>只要把 -h 换成 -r 就行了啦（不敢回车.jpg）<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180730170722191.png" alt=""></li>
+</ul>
+</li>
+<li>时间 ：<ul>
+<li>now ：现在执行</li>
+<li>具体时间点 ：定时执行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>其他关机命令（不推荐）</strong><ul>
+<li>关机 ：<ul>
+<li>halt</li>
+<li>poweroff</li>
+<li>init 0</li>
+</ul>
+</li>
+<li>重启 ：<ul>
+<li>reboot</li>
+<li>init 6</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最后的最后，到底安全在哪里呢？<ul>
+<li>因为 shutdown 在关机之前会给你尽量保存一下啦，其他的命令就有点像强行拔电源，太凶了嗯</li>
+</ul>
+</li>
+</ul>
+<h2 id="Linux中的挂载命令"><a href="#Linux中的挂载命令" class="headerlink" title="Linux中的挂载命令"></a>Linux中的挂载命令</h2><p>相当于分配盘辐</p>
+<ul>
+<li><strong>查询与自动挂载</strong><ul>
+<li>查询系统中已挂载的设备 ：mount<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180902115100650.png" alt=""></li>
+<li>根据配置文件自动挂载 ：mount -a</li>
+<li>所谓配置文件指的其实是 /etc/fstab 啦 ：<ul>
+<li>让我们进去看一下这个文件写了点啥 ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-2018090212534613.png" alt=""></li>
+<li>其实就是Linux中自动挂载的文件啦<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180902125446765.png" alt=""></li>
+<li>也就是说，只要你按照规定格式将相关内容写入这个文件，那么，它们就会在开机的时候随着系统启动而自动挂载，不再需要人为参与了（然鹅一般还是不要瞎动叭）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>挂载命令格式</strong><ul>
+<li>基本格式 ：<br>mount [-t 文件系统] [-o 特殊选项] 设备文件名 挂载点</li>
+<li>选项 ：<ul>
+<li>-t 文件系统 ：加入文件系统类型来指定挂载类型<br>（如ext3、ext4、iso9660等等这些文件系统）</li>
+<li>-0 特殊选项 ：可以指定挂载的额外选项<br>（比如下面这些，虽然其实一般保持默认就行了）<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180902160307666.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>挂载光盘</strong><ul>
+<li>首先第一件事 ：放入光盘 ( • ̀ω•́ )✧</li>
+<li>建立挂载点 ：mkdir /mnt/cdrom</li>
+<li>挂载光盘 ：mount -t iso9660 /dev/sr0 /mnt/cdrom/</li>
+<li>挂载光盘时的备注 ：<ul>
+<li>可以省略 -t iso9660</li>
+<li>/dev/sr0 换成 /dev/cdrom 也行，它俩是软链接</li>
+<li>但还是建议用 /dev/sr0 啦</li>
+</ul>
+</li>
+<li>最后进入 /mnt/cdrom/，ls 查看一下，完美</li>
+<li>放张流程图 ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180902164036940.png" alt=""></li>
+</ul>
+</li>
+<li><strong>卸载光盘</strong><ul>
+<li>基本语法 ：umount [设备文件名或挂载点]</li>
+<li>啥意思呢？也就是说 ：<ul>
+<li>umount /mnt/cdrom</li>
+<li>或者 umount /dev/sr0</li>
+<li>都可以；毕竟两个挂载到一起了</li>
+</ul>
+</li>
+<li>让我们来看下效果 ：<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180902164755154.png" alt=""></li>
+<li>为什么没有成功呢？因为你还在目录里呢！</li>
+<li>让我们退出来再看一下 –&gt; 就成功啦<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180902164943927.png" alt=""></li>
+<li>注意用完之后一定要卸载一定要卸载一定要卸载！</li>
+</ul>
+</li>
+</ul>
+<h2 id="Linux中的用户登录查看命令"><a href="#Linux中的用户登录查看命令" class="headerlink" title="Linux中的用户登录查看命令"></a>Linux中的用户登录查看命令</h2><ul>
+<li><strong>查看用户的登录信息 ：w</strong><ul>
+<li>基本语法 ：w</li>
+<li>对没错就是 w！然后回车！<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180902174808271.png" alt=""></li>
+<li>命令输出 ：<ul>
+<li>USER ：登录的用户名</li>
+<li>TTY ：登录终端</li>
+<li>FROM ：从哪个IP地址登录的</li>
+<li>LOGIN@ ：登录时间</li>
+<li>IDLE ：用户闲置时间</li>
+<li>JCPU ：指的是和该终端连接的所有进程占用的时间（注 ：该时间不包括过去的后台作业时间，但包括当前正在运行的后台作业所占用的时间）</li>
+<li>PCPU ：指当前进程所占用的时间</li>
+<li>WHAT ：当前正在运行的命令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>查看用户的登录信息 ：who</strong><ul>
+<li>基本语法 ：who<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180902180937278.png" alt=""></li>
+<li>命令输出 ：<ul>
+<li>用户名</li>
+<li>登录终端</li>
+<li>登录时间（登录来源IP）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>查询当前登录和过去登录的用户信息 ：last</strong><ul>
+<li>基本语法 ：last<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180902181842182.png" alt=""></li>
+<li>注 ：last命令默认是读取 /var/log/wtmp 文件中的数据的</li>
+<li>命令输出 ：<ul>
+<li>用户名</li>
+<li>登录终端</li>
+<li>登录IP</li>
+<li>登录时间</li>
+<li>退出时间（在线时间）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>查看所有用户的最后一次登录时间 ：lastlog</strong><ul>
+<li>基本语法 ：lastlog<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180902183328696.png" alt=""></li>
+<li>注 ：lastlog命令默认读取 /var/log/lastlog</li>
+<li>命令输出 ：<ul>
+<li>用户名</li>
+<li>登录终端</li>
+<li>登录IP</li>
+<li>最后一次登录时间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>最后来一个小小的总结 ：</strong><ul>
+<li>总之上面几个主要用途是！</li>
+<li>用来看你的系统有没有被其他用户登录过啦 _(:з」∠)_</li>
+</ul>
+</li>
+</ul>
+<h2 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h2><ul>
+<li>Ctrl + C ：强制终止当前命令</li>
+<li>Ctrl + L ：清屏</li>
+<li>Ctrl + A ：光标移动到命令行首</li>
+<li>Ctrl + E ：光标移动到命令行尾</li>
+<li>Ctrl + U ：从光标所在位置删除到行首</li>
+<li>Ctrl + Z ：将命令放入后台执行（避免使用）</li>
+<li>Ctrl + R ：搜索历史命令（不常用）</li>
+<li>Ctrl + Alt + Enter ：将虚拟机全屏</li>
+<li>Ctrl + Alt ：将光标移出虚拟机</li>
+</ul>
+<h2 id="杂七杂八的"><a href="#杂七杂八的" class="headerlink" title="杂七杂八的"></a>杂七杂八的</h2><ul>
+<li>pwd ：查看当前所在目录</li>
+<li>cd - ：回到刚刚所在的目录</li>
+<li>Tab 键按一下 再按一下 ：<br>唯一则自动补全，不唯一则给提示</li>
+<li>ll : ls -l 的简写，显示文件详细信息</li>
+<li>删除某文件夹内的全部内容 ：rm -rf 目录名/*<br><img src="/2018/09/20/Linux常用命令/markdown-img-paste-20180727190119147.png" alt=""><br>注意加不加根目录的那个”/“要看它到底在不在根目录下</li>
+<li>touch 创建空文件</li>
+<li>touch .xxx 创建隐藏文件</li>
+<li>mkdir .xxx 创建隐藏文件夹</li>
+<li>ls -a 可查看隐藏文件/文件夹</li>
+<li>cat 查看文件</li>
+<li>vim 进入文件</li>
+<li>echo “xxx” ：在屏幕上输出xxx</li>
+<li>chmod 改变文件权限（查一下再用）</li>
+<li>alias ：查看系统中已生效的别名</li>
+<li>设置别名 ：alias [原名]=’别名’（重启后失效）</li>
+<li>永久设置别名 ：vi !/.bashrc –&gt; 进入环境变量配置文件 –&gt; 然后像上面一下设置一下 –&gt; 保存退出，over（重启后生效）–&gt; 或者在最后 source .bashrc（立即生效）</li>
+<li>删除别名 ：unalias 别名（重启后失效）</li>
+<li>程序自动执行时判断是否出错 ：<br>命令（如ls） &amp;&amp; echo ‘yes’ || echo ‘no’</li>
+<li>管道符 ：命令1 | 命令2 –&gt;<br>使命令1的执行结果作为命令2的操作对象</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux合集/">Linux合集</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/09/20/Linux常用命令/" data-title="Linux常用命令 | 啾啾子的小博客" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2018/09/20/Linux第二弹/" title="Linux第二弹">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Linux第二弹</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/09/20/导向Linux/"  title="导向Linux">
+ <strong>NEXT:</strong><br/> 
+ <span>导向Linux
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#命令基本格式"><span class="toc-number">1.</span> <span class="toc-text">命令基本格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-中常见目录的作用"><span class="toc-number">2.</span> <span class="toc-text">Linux 中常见目录的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查询目录中内容-：ls"><span class="toc-number">3.</span> <span class="toc-text">查询目录中内容 ：ls</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目录-文件处理命令"><span class="toc-number">4.</span> <span class="toc-text">目录 / 文件处理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件搜索命令"><span class="toc-number">5.</span> <span class="toc-text">文件搜索命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#帮助命令"><span class="toc-number">6.</span> <span class="toc-text">帮助命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#压缩与解压缩命令"><span class="toc-number">7.</span> <span class="toc-text">压缩与解压缩命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关机与重启命令"><span class="toc-number">8.</span> <span class="toc-text">关机与重启命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux中的挂载命令"><span class="toc-number">9.</span> <span class="toc-text">Linux中的挂载命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux中的用户登录查看命令"><span class="toc-number">10.</span> <span class="toc-text">Linux中的用户登录查看命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用快捷键"><span class="toc-number">11.</span> <span class="toc-text">常用快捷键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#杂七杂八的"><span class="toc-number">12.</span> <span class="toc-text">杂七杂八的</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/Linux合集/" title="Linux合集">Linux合集<sup>4</sup></a></li>
+		
+			<li><a href="/categories/工具向整理/" title="工具向整理">工具向整理<sup>3</sup></a></li>
+		
+			<li><a href="/categories/数据库系列/" title="数据库系列">数据库系列<sup>1</sup></a></li>
+		
+			<li><a href="/categories/纸上谈系列/" title="纸上谈系列">纸上谈系列<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/JSP/" title="JSP">JSP<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>4</sup></a></li>
+		
+			<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+		
+			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/idea/" title="idea">idea<sup>1</sup></a></li>
+		
+			<li><a href="/tags/maven/" title="maven">maven<sup>1</sup></a></li>
+		
+			<li><a href="/tags/netty/" title="netty">netty<sup>1</sup></a></li>
+		
+			<li><a href="/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+		
+			<li><a href="/tags/servlet/" title="servlet">servlet<sup>1</sup></a></li>
+		
+			<li><a href="/tags/webSocket/" title="webSocket">webSocket<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://a-limon.github.io/pacman/hello/introducing-pacman-theme/#" target="_blank" title="Pacman">Pacman</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 我们的目标是！ <br/>
+			早睡早起，不掉头发！</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com//" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com//" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/yuanLier" target="_blank" title="github"></a>
+		
+		
+		<a href="https://www.facebook.com//" target="_blank" title="facebook"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="yuanLier">yuanLier</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:""};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"position":"right","width":120,"height":240},"mobile":{"show":true},"log":false});</script></body>
+</html>

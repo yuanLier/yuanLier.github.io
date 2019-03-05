@@ -1,0 +1,773 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>纸上谈JSP | 啾啾子的小博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="yuanLier">
+    
+    <meta name="description" itemprop="description" content="因为不想写代码所以假装捋一遍的JSP">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="/" />
+    <meta name="twitter:title" content="纸上谈JSP | 啾啾子的小博客" />
+      
+        <meta name="twitter:description" content="因为不想写代码所以假装捋一遍的JSP" />
+      
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="啾啾子的小博客" title="啾啾子的小博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="啾啾子的小博客">啾啾子的小博客</a></h1>
+				<h2 class="blog-motto">又名 啾啾子·不知道瞎写了些啥玩意·的小博客</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/09/20/纸上谈JSP/" title="纸上谈JSP" itemprop="url">纸上谈JSP</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="yuanLier">yuanLier</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-09-20T15:09:54.000Z" itemprop="datePublished">2018-09-20</time>
+    Updated:<time datetime="2018-10-05T10:04:05.755Z" itemprop="dateModified">2018-10-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#WEB-INF-目录结构"><span class="toc-number">1.</span> <span class="toc-text">WEB-INF 目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP基础语法"><span class="toc-number">2.</span> <span class="toc-text">JSP基础语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP内置对象"><span class="toc-number">3.</span> <span class="toc-text">JSP内置对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaBeans"><span class="toc-number">4.</span> <span class="toc-text">JavaBeans</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP状态管理"><span class="toc-number">5.</span> <span class="toc-text">JSP状态管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP中的指令与动作元素"><span class="toc-number">6.</span> <span class="toc-text">JSP中的指令与动作元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后的最后"><span class="toc-number">7.</span> <span class="toc-text">最后的最后</span></a></li></ol>
+		</div>
+		
+		<h2 id="WEB-INF-目录结构"><a href="#WEB-INF-目录结构" class="headerlink" title="WEB-INF 目录结构"></a>WEB-INF 目录结构</h2><ul>
+<li>WEB-INF ：安全目录<ul>
+<li>即客户端无法访问，只有服务端可以访问的目录</li>
+</ul>
+</li>
+<li>web.xml ：项目部署文件（即配置文件）<ul>
+<li>默认的欢迎界面为 index.jsp，但也可以设定为其他 ：<br><img src="/2018/09/20/纸上谈JSP/markdown-img-paste-20180823115622378.png" alt=""></li>
+<li>修改后重启一下Tomcat服务器，就可以应用啦</li>
+</ul>
+</li>
+<li>classes 文件夹 ：<ul>
+<li>存放 *.class 文件，即编译生成的字节码文件</li>
+</ul>
+</li>
+<li>lib 文件夹 ：<ul>
+<li>存放项目所需要的jar包（如连接数据库的jar包）</li>
+</ul>
+</li>
+</ul>
+<h2 id="JSP基础语法"><a href="#JSP基础语法" class="headerlink" title="JSP基础语法"></a>JSP基础语法</h2><ul>
+<li><strong>JSP页面元素构成 ：</strong><ul>
+<li>直接放张图好了<br><img src="/2018/09/20/纸上谈JSP/markdown-img-paste-20180823125437110.png" alt=""></li>
+</ul>
+</li>
+<li><strong>JSP指令元素 ：</strong><ul>
+<li>page指令<ul>
+<li>通常位于JSP页面顶端</li>
+<li>用一个页面中可以有多个page指令</li>
+</ul>
+</li>
+<li>include指令<ul>
+<li>可将外部文件嵌入当前JSP文件中</li>
+<li>同时解析这个页面中的JSP语句</li>
+</ul>
+</li>
+<li>taglib指令<ul>
+<li>主要用于自定义标签</li>
+<li>在jsp页面中启用定制行为</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>page指令语法 ：</strong></p>
+<ul>
+<li><p>基本语法 ：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%</span> @<span class="attr">page</span> 属性<span class="attr">1</span>=<span class="string">"属性值"</span> 属性<span class="attr">2</span>=<span class="string">"属性值1,属性值2"</span><span class="attr">...</span></span></span><br><span class="line"><span class="tag">         属性<span class="attr">n</span>=<span class="string">"属性值n"</span> %&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常见属性及其默认值 ：</p>
+<ul>
+<li>language（默认值java）：<br>指定JSP页面所使用的脚本语言</li>
+<li>import（无默认值）：<br>通过该属性来引用脚本语言中使用到的类文件</li>
+<li>contentType（默认为text/html;ISO-8859-1）：<br>用来指定JSP页面所采用的编码方式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>jsp中的注释 ：</strong></p>
+<ul>
+<li><p>HTML的注释 ：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--html注释--&gt;</span>  //客户端可见</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JSP的注释 ：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%--JSP注释--%</span>&gt;</span>  //客户端不可见</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JSP脚本注释 ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//单行注释</span></span><br><span class="line"><span class="comment">/*多行注释*/</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>JSP脚本</strong></p>
+<ul>
+<li><p>基本语法 ：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">Java</span>代码 %&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用于实现各种脚本逻辑</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag"> <span class="attr">String</span> <span class="attr">s</span> = <span class="string">"假装有逻辑"</span>;</span></span><br><span class="line"><span class="tag"> <span class="attr">out.println</span>(<span class="attr">s</span>);</span></span><br><span class="line"><span class="tag">%&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>JSP声明</strong></p>
+<ul>
+<li><p>基本语法 ：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%!</span> <span class="attr">Java</span>代码 %&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用于变量或方法的声明 ：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%!</span></span></span><br><span class="line"><span class="tag"> <span class="attr">String</span> <span class="attr">s</span> = <span class="string">"张三"</span>;</span></span><br><span class="line"><span class="tag"> <span class="attr">int</span> <span class="attr">add</span>(<span class="attr">int</span> <span class="attr">x</span>, <span class="attr">int</span> <span class="attr">y</span>)&#123;</span></span><br><span class="line"><span class="tag">   <span class="attr">return</span> <span class="attr">x</span> + <span class="attr">y</span>;</span></span><br><span class="line"><span class="tag"> &#125;</span></span><br><span class="line"><span class="tag">%&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>JSP表达式</strong></p>
+<ul>
+<li><p>基本语法 ：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%=</span> 变量或表达式 %&gt;</span>  //注意表达式不以分号结束</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>就比如说，调用上面声明的 ：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">你好呀 <span class="tag">&lt;<span class="name">b</span>&gt;</span> <span class="tag">&lt;<span class="name">%=</span> <span class="attr">s</span> %&gt;</span> <span class="tag">&lt;<span class="name">b</span>&gt;</span> 小朋友~ <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">你知道 1 + 1 = <span class="tag">&lt;<span class="name">%=</span> <span class="attr">add</span>(<span class="attr">1</span>,<span class="attr">1</span>) %&gt;</span> 不？</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>JSP页面的生命周期</strong></p>
+<ul>
+<li>还是放张图好了 ：<br><img src="/2018/09/20/纸上谈JSP/markdown-img-paste-20180823184207745.png" alt=""></li>
+<li>然后再放张图 嘿嘿 ：<br><img src="/2018/09/20/纸上谈JSP/markdown-img-paste-20180823190422671.png" alt=""></li>
+<li>最后做个练习题叭！<br><img src="/2018/09/20/纸上谈JSP/markdown-img-paste-20181005154946447.png" alt=""><br>答案是什么呢是什么呢？jspInit()嘛？居！然！不是哦！<br>那么答案是什么呢！答案是 –&gt; 构造方法！为什么呢？<br>因为要先把JSP文件转化为一个Servlet嘛，然后Servlet是个类，所以初始化的时候要先执行它的构造函数 嗷呜</li>
+</ul>
+</li>
+</ul>
+<h2 id="JSP内置对象"><a href="#JSP内置对象" class="headerlink" title="JSP内置对象"></a>JSP内置对象</h2><p>即由web容器创建的，不用new就能直接用的一组对象</p>
+<ul>
+<li><strong>JSP的九大内置对象</strong><ul>
+<li>依惯例放张图，绿色里面是不常用的 ：<br><img src="/2018/09/20/纸上谈JSP/markdown-img-paste-20180823195138535.png" alt=""></li>
+</ul>
+</li>
+<li><p><strong>out对象</strong></p>
+<ul>
+<li>基础描述 ：<ul>
+<li>JspWriter类的实例</li>
+<li>用于向客户端输出内容</li>
+</ul>
+</li>
+<li><p>out对象的常用方法 ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//向客户端打印字符串</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">println</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//清除缓存区的内容（若在flush之后调用会抛出异常）</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//清除缓存区的内容（若在flush之后调用不会抛出异常）</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clearBuffer</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//将缓冲区内容输出到客户端</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//返回缓冲区的字节数大小，若不设缓冲区则返回0</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getBufferSize</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//返回缓冲区还剩多少字节数可用</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getRemaining</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//返回缓冲区满时是否自动清空还是抛出异常</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isAutoFlush</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//关闭输出流</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">close</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后，什么是缓冲区？还是放图叭<br><img src="/2018/09/20/纸上谈JSP/markdown-img-paste-20180823195802344.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><strong>request对象</strong></p>
+<ul>
+<li>基础描述 ：<ul>
+<li>HttpServletRequest类的实例</li>
+<li>用于封装客户端的请求信息</li>
+<li>在完成客户端的请求前一直有效</li>
+</ul>
+</li>
+<li>request对象的常用方法 ：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回name指定参数的参数值</span></span><br><span class="line"><span class="function">String <span class="title">getParameter</span><span class="params">(String name)</span></span>;</span><br><span class="line"><span class="comment">//返回包含参数name的所有值的数组</span></span><br><span class="line">String[] getParameterValues(String name);</span><br><span class="line"><span class="comment">//为该请求中的属性设值</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setAttribute</span><span class="params">(String,Object)</span></span>;</span><br><span class="line"><span class="comment">//获取某一属性的属性值</span></span><br><span class="line"><span class="function">Object <span class="title">getAttribute</span><span class="params">(String name)</span></span>;</span><br><span class="line"><span class="comment">//得到请求体的MIME类型</span></span><br><span class="line"><span class="comment">//（比如 application/x-www-form-urlencoded）</span></span><br><span class="line"><span class="function">String <span class="title">getContentType</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//返回请求用的协议类型及版本号</span></span><br><span class="line"><span class="comment">//（比如 HTTP/1.1）</span></span><br><span class="line"><span class="function">String String <span class="title">getProtocol</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//返回接受请求的服务器的主机名</span></span><br><span class="line"><span class="function">String <span class="title">getServerName</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//返回服务器接受此请求用的端口号</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getServerPort</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//返回字符编码方式</span></span><br><span class="line"><span class="function">String <span class="title">getCharacterEncoding</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//设置请求的字符编码方式</span></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">setCharacterEncoding</span><span class="params">()</span></span>;</span><br><span class="line"> <span class="comment">//返回请求体的长度（单位为字节数）</span></span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">getContentLength</span><span class="params">()</span></span>;</span><br><span class="line"> <span class="comment">//返回发送此请求的客户端的IP地址</span></span><br><span class="line"> <span class="function">String <span class="title">getRemoteAddr</span><span class="params">()</span></span>;</span><br><span class="line"> <span class="comment">//返回发出该请求的真实物理路径</span></span><br><span class="line"> <span class="function">String <span class="title">getRealPath</span><span class="params">(String path)</span></span>;</span><br><span class="line"> <span class="comment">//返回上下文路径（即项目所在根目录）</span></span><br><span class="line"> <span class="comment">//（比如 /DemoJsp）</span></span><br><span class="line"> <span class="function">String <span class="title">getContextPath</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>response对象</strong></p>
+<ul>
+<li>基础描述 ：<ul>
+<li>HttpServletResponse类的实例</li>
+<li>包含了响应客户请求的有关信息</li>
+<li>但在JSP中很少直接用到</li>
+<li>具有页面作用域，即访问一个页面时，该页面内的response对象只对本次访问有效，其他页面的response对象对当前页面无效</li>
+</ul>
+</li>
+<li><p>response对象的常用方法 ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回是用何种字符编码进行响应的</span></span><br><span class="line"><span class="function">String <span class="title">getCharacterEncoding</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//设置响应的MIME类型</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setContentType</span><span class="params">(String type)</span></span>;</span><br><span class="line"><span class="comment">//返回一个可以向客户端输出字符的对象</span></span><br><span class="line"><span class="function">PrintWriter <span class="title">getWriter</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//重定向客户端的请求</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sendRedirect</span><span class="params">(String location)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>response.getWriter()和out.println()的区别 ：</p>
+<ul>
+<li>前者获取的输出流对象总是先于后者打印</li>
+<li>可以在out输出后调用flush清空缓存，然后使用response的输出流，就可以让它在后面显示了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>请求转发和请求重定向的区别</strong><ul>
+<li>请求重定向 ：<ul>
+<li>客户端行为</li>
+<li>response.sendRedirect();</li>
+<li>相当于两次请求</li>
+<li>不保存前一次的请求对象</li>
+<li>地址栏的URL发生改变</li>
+</ul>
+</li>
+<li>请求转发 ：<ul>
+<li>服务器行为</li>
+<li>request.getRequestDispatcher().forward(request,response);</li>
+<li>相当于一次请求</li>
+<li>保存请求对象</li>
+<li>地址栏的URL不改变</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>session对象</strong></p>
+<ul>
+<li>基础描述 ：<ul>
+<li>表示客户端和服务端的一次会话</li>
+<li>保存在服务器的内存中，和用户一一对应</li>
+<li>Web中的session指的是用户在浏览某个网站时，从进入网站到浏览器关闭所经过的这段时间，也就是用户浏览该网站所花费的时间；所以说session实际上是一个特定的时间概念（？）</li>
+</ul>
+</li>
+<li>session对象的常用方法 ：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回session的创建时间</span></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">getCreationTime</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//返回session创建时，JSP引擎为它设置的唯一ID号</span></span><br><span class="line"><span class="function">String <span class="title">getId</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//为session设置属性并赋值</span></span><br><span class="line"><span class="function">Object <span class="title">setAttribute</span><span class="params">(String name,Object value)</span></span>;</span><br><span class="line"><span class="comment">//获取session中某一属性的值；若无则返回null</span></span><br><span class="line"><span class="function">Object <span class="title">getAttribute</span><span class="params">(String name)</span></span>;</span><br><span class="line"><span class="comment">//以字符数组的形式返回该session中所有属性</span></span><br><span class="line">String[] getValueNames();</span><br><span class="line"><span class="comment">//返回该session的最大存活时间（单位：秒）</span></span><br><span class="line"><span class="comment">//该session过期后会重新连接并生成新的session</span></span><br><span class="line"><span class="comment">//相当于一个新的会话</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getMaxInactiveInterval</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>session的生命周期</strong></p>
+<ul>
+<li>生命周期的三个阶段 ：<ul>
+<li>创建、活动、销毁</li>
+</ul>
+</li>
+<li>创建 ：<ul>
+<li>当客户端第一次访问某个JSP或Servlet时，服务器会为当前会话创建一个sessionId，每次向客户端发送请求时，都会将此sessionId携带过去，服务器会对此id进行校验</li>
+</ul>
+</li>
+<li>活动 ：<ul>
+<li>某次会话中通过超链接打开的新页面<br>–&gt; 属于同一次会话</li>
+<li>当前会话页面没有全部关闭，重新打开新的浏览器窗口访问同一项目资源<br>–&gt; 属于同一会话</li>
+<li>本次会话的所有页面都关闭后再重新访问<br>–&gt; 创建新的会话（注意原有会话依然存在，旧的id仍保存在服务端，只是再没有客户端会携带它然后交予服务端校验）</li>
+</ul>
+</li>
+<li>销毁 ：<ul>
+<li>调用session.invalidate()方法</li>
+<li>或该session过期（超时）</li>
+<li>或服务器重新启动</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>application对象</strong></p>
+<ul>
+<li>基础描述 ：<ul>
+<li>ServletContext类的实例</li>
+<li>实现了用户间数据的共享，可存放全局变量</li>
+<li>在用户的前后连接或不同用户之间的连接中，只要服务器未中途重启，操作的均是同一个application</li>
+<li>开始于服务器的启动，终止于服务器的关闭</li>
+</ul>
+</li>
+<li>application对象的常用方法 ：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//为该application设置属性并赋值</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setAttribute</span><span class="params">(String name, Object value)</span></span>;</span><br><span class="line"><span class="comment">//获取application中某一属性的值；若无则返回null</span></span><br><span class="line"><span class="function">Object <span class="title">getAttribute</span><span class="params">(String name)</span></span>;</span><br><span class="line"><span class="comment">//以枚举的形式返回该application中的所有属性</span></span><br><span class="line"><span class="function">Enumeration <span class="title">getAttributeNames</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//返回JSP的引擎名及版本号</span></span><br><span class="line"><span class="comment">//比如 Apache Tomcat/7.0.26</span></span><br><span class="line"><span class="function">String <span class="title">getServerInfo</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>page对象</strong></p>
+<ul>
+<li>基础描述 ：<ul>
+<li>java.lang.Object类的实例</li>
+<li>指向当前JSP页面本事</li>
+<li>可以理解为类中的this指针</li>
+</ul>
+</li>
+<li>page对象的常用方法 ：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String methods = <span class="string">"就是Object类里面的那些方法啦"</span>;</span><br><span class="line">String plus = <span class="string">"毕竟是它的实例嘛"</span>;</span><br><span class="line">System.out.println(method + <span class="string">"，"</span> + plus);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="JavaBeans"><a href="#JavaBeans" class="headerlink" title="JavaBeans"></a>JavaBeans</h2><p>即遵循了某种设计原则的Java类</p>
+<ul>
+<li><strong>JavaBeans的设计原则</strong><ul>
+<li>公有类</li>
+<li>无参的公有构造方法</li>
+<li>私有属性</li>
+<li>getter &amp;&amp; setter</li>
+</ul>
+</li>
+<li><p><strong>JSP中JavaBeans的使用方法</strong></p>
+<ul>
+<li>使用普通方法创建JavaBeans ：<ul>
+<li>直接在 &lt;% 脚本 %&gt; 里面new就好了</li>
+<li>跟Java里的使用一样一样的</li>
+<li>记得用 &lt;% page import=”” %&gt; 导入它</li>
+</ul>
+</li>
+<li><p>使用useBean实例化JavaBeans对象 ：</p>
+<ul>
+<li>话不多说了直接放代码吧<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">jsp:useBean</span> <span class="attr">id</span>=<span class="string">"myUser"</span> <span class="attr">class</span>=<span class="string">"com.po.Users"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>使用useBean创建JavaBea实例<span class="tag">&lt;<span class="name">h1</span>/&gt;</span></span><br><span class="line">用户名 ：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">myUser.getUserName</span>() %&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">密码 ：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">myUser.getPassword</span>() %&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>通过setProperty设置属性 ：</p>
+<ul>
+<li><p>给已实例化的Bean对象的属性赋值，共四种形式</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 与表单相关联，根据表单名的完全匹配 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">jsp:setProperty</span> <span class="attr">name</span>=<span class="string">"JavaBean实例名"</span> <span class="attr">property</span>=<span class="string">"*"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 与表单相关联，根据表单名的部分匹配 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">jsp:setProperty</span> <span class="attr">name</span>=<span class="string">"JavaBean实例名"</span> <span class="attr">property</span>=<span class="string">"JavaBean属性名"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 与表单无关，为JavaBean属性手动设值 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">jsp:setProperty</span> <span class="attr">name</span>=<span class="string">"JavaBean实例名"</span> <span class="attr">property</span>=<span class="string">"JavaBean属性名"</span> <span class="attr">value</span>=<span class="string">"该属性的值"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 与request参数相关联，通过URL传参赋值 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">jsp:setProperty</span> <span class="attr">name</span>=<span class="string">"JavaBean实例名"</span> <span class="attr">property</span>=<span class="string">"JavaBean属性名"</span> <span class="attr">param</span>=<span class="string">"request对象中的参数名"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后的最后还是要放张图<br><img src="/2018/09/20/纸上谈JSP/markdown-img-paste-20180824135838740.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li>通过getProperty获取属性值 ：<ul>
+<li>还是直接上图吧  嘤<br><img src="/2018/09/20/纸上谈JSP/markdown-img-paste-20180824145426683.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>JavaBean的四个作用域范围</strong><br>注：使用useBeans的scope属性可以指定其作用范围<ul>
+<li>四个作用域及对应的JavaBean对象获取方法 ：<ul>
+<li>page ：仅在当前页面有效</li>
+<li>request ：可通过HttpRequest.getAttribute()获取</li>
+<li>session ：可通过HttpSession.getAttribute()获取</li>
+<li>application ：通过application.getAttribute()获取</li>
+</ul>
+</li>
+<li>注意当作用域为request时，需要使用请求转发来跳转；否则相当于请求了两次，得不到原request中保存的信息</li>
+</ul>
+</li>
+</ul>
+<h2 id="JSP状态管理"><a href="#JSP状态管理" class="headerlink" title="JSP状态管理"></a>JSP状态管理</h2><ul>
+<li><strong>http协议的无状态性</strong><ul>
+<li>无状态是指，当浏览器发送请求给服务器，服务器就响应客户端请求；但是，当同一个浏览器再次发送请求给该服务器的时候，服务器并不知道它既是刚才那个浏览器</li>
+<li>所以，如果我们想让服务器记得我们的浏览器，顺便把我们的用户状态给保存了，该要怎么做呢？</li>
+</ul>
+</li>
+<li><strong>保存用户状态的两个机制</strong><ul>
+<li>session ：相当于直接给服务端一个小笔记本，用来记录每个客户端对应的的请求信息</li>
+<li>cookie ：相当于让浏览器在每次请求的时候都带上一小段特定信息表明身份，这样服务器就知道每个请求是由哪个客户端发出的了</li>
+</ul>
+</li>
+<li><p><strong>JSP页面中创建与使用cookie</strong></p>
+<ul>
+<li><p>Cookie的创建、写入、与读取 ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建Cookie对象</span></span><br><span class="line">Cookie myCookie  = <span class="keyword">new</span> Cookie(String key,Object value);</span><br><span class="line"><span class="comment">//写入Cookie对象</span></span><br><span class="line">response.addCookie(myCookie);</span><br><span class="line"><span class="comment">//读取Cookie对象</span></span><br><span class="line">Cookie[] cookies = request.getCookes();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cookie对象的常见方法 ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置cookie的有效期（单位：秒）</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setMaxAge</span><span class="params">(<span class="keyword">int</span> expiry)</span></span>;</span><br><span class="line"><span class="comment">//对已创建的cookie进行赋值</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setValue</span><span class="params">(String value)</span></span>;</span><br><span class="line"><span class="comment">//获取cookie的名称</span></span><br><span class="line"><span class="function">String <span class="title">getName</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//获取cookie的值</span></span><br><span class="line"><span class="function">String <span class="title">getValue</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//获取cookie的有效期（单位：秒）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getMaxAge</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>session和cookie的对比</strong></p>
+<ul>
+<li>就不列举了直接放图吧<br><img src="/2018/09/20/纸上谈JSP/markdown-img-paste-20180824162857329.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<h2 id="JSP中的指令与动作元素"><a href="#JSP中的指令与动作元素" class="headerlink" title="JSP中的指令与动作元素"></a>JSP中的指令与动作元素</h2><ul>
+<li><strong>include指令</strong><ul>
+<li>语法 ：<ul>
+<li>&lt;%@ include file=”URL” %&gt;</li>
+</ul>
+</li>
+<li>用途 ：<ul>
+<li>简单来说，就是使一个页面包含另一个页面的内容</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>include动作</strong><ul>
+<li>语法 ：<ul>
+<li>&lt;jsp:include page=”URL” flush=”true|false”/&gt;</li>
+</ul>
+</li>
+<li>属性 ：<ul>
+<li>page ：要包含的页面</li>
+<li>flush ：被包含的页面是否从缓冲区读入</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>include指令与include动作的区别</strong><ul>
+<li>本质比较 ：<ul>
+<li>include指令 ：包含的是代码</li>
+<li>include动作 ：包含的是运行结果</li>
+</ul>
+</li>
+<li>其他比较 ：<ul>
+<li>如图如图 ：<br><img src="/2018/09/20/纸上谈JSP/markdown-img-paste-20180824192350996.png" alt=""></li>
+</ul>
+</li>
+<li>最后放个问题 ：<br><img src="/2018/09/20/纸上谈JSP/markdown-img-paste-20180824194255881.png" alt=""><br>以及关于这个问题感觉看上去还挺靠谱的一个答案 ：<br><img src="/2018/09/20/纸上谈JSP/markdown-img-paste-20180824194344984.png" alt=""></li>
+</ul>
+</li>
+<li><strong>forward动作</strong><ul>
+<li>语法 ：<ul>
+<li>&lt;jsp:forward page=”URL”/&gt;</li>
+</ul>
+</li>
+<li>等同于 ：<ul>
+<li>request.getRequestDispatcher(“/URL”).forward(request,response);</li>
+<li>也就是说等同于请求转发啦</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>param动作</strong><ul>
+<li>语法 ：<ul>
+<li>&lt;jsp:param name=”参数名” value=”参数值”/&gt;</li>
+</ul>
+</li>
+<li>备注 ：<ul>
+<li>常常与 &lt; jsp:forward &gt; 一起使用，作为其的子标签，用来在请求转发时传递参数（或添加新的参数）</li>
+<li>子标签和传参的概念都很好理解这里就不放示例了</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="最后的最后"><a href="#最后的最后" class="headerlink" title="最后的最后"></a>最后的最后</h2><ul>
+<li>我们的纸上谈JSP到此结束 撒花٩(๑&gt;◡&lt;๑)۶</li>
+<li>接下来让我们期待与纸上谈系列之二 –&gt;</li>
+<li>纸上谈Servlet  mua！( • ̀ω•́ )✧</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JSP/">JSP</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/纸上谈系列/">纸上谈系列</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/09/20/纸上谈JSP/" data-title="纸上谈JSP | 啾啾子的小博客" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2018/09/20/idea相关/" title="idea相关">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  idea相关</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/09/20/纸上谈servlet/"  title="纸上谈servlet">
+ <strong>NEXT:</strong><br/> 
+ <span>纸上谈servlet
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#WEB-INF-目录结构"><span class="toc-number">1.</span> <span class="toc-text">WEB-INF 目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP基础语法"><span class="toc-number">2.</span> <span class="toc-text">JSP基础语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP内置对象"><span class="toc-number">3.</span> <span class="toc-text">JSP内置对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaBeans"><span class="toc-number">4.</span> <span class="toc-text">JavaBeans</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP状态管理"><span class="toc-number">5.</span> <span class="toc-text">JSP状态管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP中的指令与动作元素"><span class="toc-number">6.</span> <span class="toc-text">JSP中的指令与动作元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后的最后"><span class="toc-number">7.</span> <span class="toc-text">最后的最后</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/Linux合集/" title="Linux合集">Linux合集<sup>4</sup></a></li>
+		
+			<li><a href="/categories/工具向整理/" title="工具向整理">工具向整理<sup>3</sup></a></li>
+		
+			<li><a href="/categories/数据库系列/" title="数据库系列">数据库系列<sup>1</sup></a></li>
+		
+			<li><a href="/categories/纸上谈系列/" title="纸上谈系列">纸上谈系列<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/JSP/" title="JSP">JSP<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>4</sup></a></li>
+		
+			<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+		
+			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/idea/" title="idea">idea<sup>1</sup></a></li>
+		
+			<li><a href="/tags/maven/" title="maven">maven<sup>1</sup></a></li>
+		
+			<li><a href="/tags/netty/" title="netty">netty<sup>1</sup></a></li>
+		
+			<li><a href="/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+		
+			<li><a href="/tags/servlet/" title="servlet">servlet<sup>1</sup></a></li>
+		
+			<li><a href="/tags/webSocket/" title="webSocket">webSocket<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://a-limon.github.io/pacman/hello/introducing-pacman-theme/#" target="_blank" title="Pacman">Pacman</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 我们的目标是！ <br/>
+			早睡早起，不掉头发！</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com//" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com//" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/yuanLier" target="_blank" title="github"></a>
+		
+		
+		<a href="https://www.facebook.com//" target="_blank" title="facebook"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="yuanLier">yuanLier</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:""};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"position":"right","width":120,"height":240},"mobile":{"show":true},"log":false});</script></body>
+</html>

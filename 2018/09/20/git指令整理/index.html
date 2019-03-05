@@ -1,0 +1,449 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>git指令整理 | 啾啾子的小博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="yuanLier">
+    
+    <meta name="description" itemprop="description" content="都是踩完坑之后血和泪换来的教训 嘤；&lt;br&gt;然而就算是假装整理了一下也还是很杂 哭哭">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="/" />
+    <meta name="twitter:title" content="git指令整理 | 啾啾子的小博客" />
+      
+        <meta name="twitter:description" content="都是踩完坑之后血和泪换来的教训 嘤；&lt;br&gt;然而就算是假装整理了一下也还是很杂 哭哭" />
+      
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="啾啾子的小博客" title="啾啾子的小博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="啾啾子的小博客">啾啾子的小博客</a></h1>
+				<h2 class="blog-motto">又名 啾啾子·不知道瞎写了些啥玩意·的小博客</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/09/20/git指令整理/" title="git指令整理" itemprop="url">git指令整理</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="yuanLier">yuanLier</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-09-20T15:23:42.000Z" itemprop="datePublished">2018-09-20</time>
+    Updated:<time datetime="2019-03-05T13:05:13.155Z" itemprop="dateModified">2019-03-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本操作"><span class="toc-number">1.</span> <span class="toc-text">基本操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程关联或取消"><span class="toc-number">2.</span> <span class="toc-text">远程关联或取消</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回滚相关"><span class="toc-number">3.</span> <span class="toc-text">回滚相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支合并"><span class="toc-number">4.</span> <span class="toc-text">分支合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程分支"><span class="toc-number">5.</span> <span class="toc-text">远程分支</span></a></li></ol>
+		</div>
+		
+		<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><ul>
+<li>git init 创建仓库</li>
+<li>git clone xxxx 拉取项目</li>
+<li>git branch -a 查看本地分支</li>
+<li>git checkout -d xxx 创建本地分支并切换到该分支</li>
+<li>git add -A 追踪本地修改过的全部文件</li>
+<li>git commit -m “xxx” 提交本地更新</li>
+<li>git pull origin xxx 拉取远程分支</li>
+<li>git push origin xxx 推送本地更新</li>
+</ul>
+<h2 id="远程关联或取消"><a href="#远程关联或取消" class="headerlink" title="远程关联或取消"></a>远程关联或取消</h2><ul>
+<li>关联远程仓库 ：<ul>
+<li>git init</li>
+<li>git remote add origin xxx</li>
+<li>注意这里的xxx其实就是指的这个 ：<br><img src="/2018/09/20/git指令整理/markdown-img-paste-20180922175251813.png" alt=""></li>
+</ul>
+</li>
+<li>取消本地关注 ：<ul>
+<li>git remote remove origin</li>
+</ul>
+</li>
+</ul>
+<h2 id="回滚相关"><a href="#回滚相关" class="headerlink" title="回滚相关"></a>回滚相关</h2><ul>
+<li>git add 后回滚到上一次（未提交） ：<ul>
+<li>git reset HEAD xxxx 撤销本次更新</li>
+<li>git checkout – xxxx 回滚到上一次提交</li>
+</ul>
+</li>
+<li>git commit 后回滚到上一次提交 ：<ul>
+<li>git log 查看全部提交的日志信息</li>
+<li>git reset –hard xxxx 回滚到xxxx(commit号)那次提交</li>
+</ul>
+</li>
+</ul>
+<h2 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h2><ul>
+<li>将新分支上的代码合并到master ：<ul>
+<li>切换到master分支后，</li>
+<li>git merge xxx</li>
+<li>最后可以 git branch -d xxx 删掉这个新分支</li>
+</ul>
+</li>
+</ul>
+<h2 id="远程分支"><a href="#远程分支" class="headerlink" title="远程分支"></a>远程分支</h2><ul>
+<li>拉取远程分支上的内容 ：<ul>
+<li>git checkout -b xxx 新建并切换本地分支</li>
+<li>git pull origin xxx 拉取远程该分支上的内容</li>
+</ul>
+</li>
+<li>在本地新建分支并推送到远程 ：<ul>
+<li>git checkout -b xxx 新建并切换到本地分支</li>
+<li>git push origin xxx 直接将该分支推送过去</li>
+</ul>
+</li>
+<li>删除某一分支 ：<ul>
+<li>首先切换到其他分支，然后，</li>
+<li>本地 ：git branch -d xxx</li>
+<li>远程 ：git push origin –delete xxx</li>
+</ul>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/git/">git</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/工具向整理/">工具向整理</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/09/20/git指令整理/" data-title="git指令整理 | 啾啾子的小博客" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2018/09/25/Netty初体验/" title="Netty初体验">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Netty初体验</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/09/20/maven相关/"  title="maven相关">
+ <strong>NEXT:</strong><br/> 
+ <span>maven相关
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本操作"><span class="toc-number">1.</span> <span class="toc-text">基本操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程关联或取消"><span class="toc-number">2.</span> <span class="toc-text">远程关联或取消</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回滚相关"><span class="toc-number">3.</span> <span class="toc-text">回滚相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支合并"><span class="toc-number">4.</span> <span class="toc-text">分支合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程分支"><span class="toc-number">5.</span> <span class="toc-text">远程分支</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/Linux合集/" title="Linux合集">Linux合集<sup>4</sup></a></li>
+		
+			<li><a href="/categories/工具向整理/" title="工具向整理">工具向整理<sup>3</sup></a></li>
+		
+			<li><a href="/categories/数据库系列/" title="数据库系列">数据库系列<sup>1</sup></a></li>
+		
+			<li><a href="/categories/纸上谈系列/" title="纸上谈系列">纸上谈系列<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/JSP/" title="JSP">JSP<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>4</sup></a></li>
+		
+			<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+		
+			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/idea/" title="idea">idea<sup>1</sup></a></li>
+		
+			<li><a href="/tags/maven/" title="maven">maven<sup>1</sup></a></li>
+		
+			<li><a href="/tags/netty/" title="netty">netty<sup>1</sup></a></li>
+		
+			<li><a href="/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+		
+			<li><a href="/tags/servlet/" title="servlet">servlet<sup>1</sup></a></li>
+		
+			<li><a href="/tags/webSocket/" title="webSocket">webSocket<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://a-limon.github.io/pacman/hello/introducing-pacman-theme/#" target="_blank" title="Pacman">Pacman</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 我们的目标是！ <br/>
+			早睡早起，不掉头发！</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com//" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com//" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/yuanLier" target="_blank" title="github"></a>
+		
+		
+		<a href="https://www.facebook.com//" target="_blank" title="facebook"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="yuanLier">yuanLier</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:""};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"position":"right","width":120,"height":240},"mobile":{"show":true},"log":false});</script></body>
+</html>

@@ -1,0 +1,804 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Redis初体验 | 啾啾子的小博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="yuanLier">
+    
+    <meta name="description" itemprop="description" content="咕了一星期的Redis啊 赐予我力量吧！">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="/" />
+    <meta name="twitter:title" content="Redis初体验 | 啾啾子的小博客" />
+      
+        <meta name="twitter:description" content="咕了一星期的Redis啊 赐予我力量吧！" />
+      
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="啾啾子的小博客" title="啾啾子的小博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="啾啾子的小博客">啾啾子的小博客</a></h1>
+				<h2 class="blog-motto">又名 啾啾子·不知道瞎写了些啥玩意·的小博客</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/10/05/Redis初体验/" title="Redis初体验" itemprop="url">Redis初体验</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="yuanLier">yuanLier</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-10-05T08:40:39.000Z" itemprop="datePublished">2018-10-05</time>
+    Updated:<time datetime="2018-10-05T10:04:11.957Z" itemprop="dateModified">2018-10-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NoSQL概述"><span class="toc-number">1.</span> <span class="toc-text">NoSQL概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis概述"><span class="toc-number">2.</span> <span class="toc-text">Redis概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis的下载与安装"><span class="toc-number">3.</span> <span class="toc-text">Redis的下载与安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jedis的使用"><span class="toc-number">4.</span> <span class="toc-text">Jedis的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis的数据结构"><span class="toc-number">5.</span> <span class="toc-text">Redis的数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis中keys的通用操作"><span class="toc-number">6.</span> <span class="toc-text">Redis中keys的通用操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis特性"><span class="toc-number">7.</span> <span class="toc-text">Redis特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis持久化"><span class="toc-number">8.</span> <span class="toc-text">Redis持久化</span></a></li></ol>
+		</div>
+		
+		<h2 id="NoSQL概述"><a href="#NoSQL概述" class="headerlink" title="NoSQL概述"></a>NoSQL概述</h2><ul>
+<li><strong>什么是NoSQL？</strong><ul>
+<li>NoSQL == Not Only sql &amp;&amp; NoSQL != No sql</li>
+<li>也就是所谓的非关系型数据库啦</li>
+</ul>
+</li>
+<li><strong>为啥需要NoSQL？</strong><ul>
+<li>因为！随着互联网的发展，非关系型数据库比关系型数据库更能满足下列需求 ：<ul>
+<li>高并发读写需求</li>
+<li>海量数据的高效率存储与访问</li>
+<li>高可扩展性与高可用性</li>
+</ul>
+</li>
+<li>详见 –&gt; <em>关不关系型数据库.md</em></li>
+</ul>
+</li>
+<li><strong>NoSQL数据库的四大分类 ：</strong><ul>
+<li>键值存储<ul>
+<li>优 ：快速查询</li>
+<li>劣 ：存储的数据缺失结构化</li>
+</ul>
+</li>
+<li>列存储<ul>
+<li>优 ：查询速度快、可扩展性强</li>
+<li>劣 ：功能相对局限</li>
+</ul>
+</li>
+<li>文档数据库<ul>
+<li>MongoDB</li>
+<li>优 ：对数据结构要求不太严格</li>
+<li>劣 ：查询性能一般、缺少统一语法</li>
+</ul>
+</li>
+<li>图形数据库<ul>
+<li>优 ：利用图结构的算法</li>
+<li>劣 ：需要对整个图做计算才能得出结果</li>
+</ul>
+</li>
+<li>最后放张对比图 ：<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20180926085006776.png" alt=""></li>
+</ul>
+</li>
+<li><strong>NoSQL的特点 ：</strong><ul>
+<li>易扩展（因为摒弃了数据之间粘连）</li>
+<li>数据模型灵活（比如说不用提前建好字段）</li>
+<li>大量数据、高性能</li>
+<li>高可用</li>
+</ul>
+</li>
+</ul>
+<h2 id="Redis概述"><a href="#Redis概述" class="headerlink" title="Redis概述"></a>Redis概述</h2><ul>
+<li><strong>Redis是什么？</strong><ul>
+<li>Redis是一种</li>
+<li>高性能</li>
+<li>键值对</li>
+<li>数据库</li>
+</ul>
+</li>
+<li><strong>Redis支持的键值数据类型有哪些？</strong><ul>
+<li>字符串类型（String）</li>
+<li>散列类型（Hash）<ul>
+<li>即 key(键)-field(属性)-value(属性值) 模式，详见：<br><a href="https://blog.csdn.net/Y2701310012/article/details/40870543" target="_blank" rel="noopener">https://blog.csdn.net/Y2701310012/article/details/40870543</a></li>
+</ul>
+</li>
+<li>列表类型（List）</li>
+<li>集合类型（Set）<ul>
+<li>相当于一个不能出现重复元素的list</li>
+</ul>
+</li>
+<li>有序集合类型（Sorted Set / zset）<ul>
+<li>相当于一个给每个元素打上分的set</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Redis的应用场景</strong><ul>
+<li>缓存</li>
+<li>任务队列</li>
+<li>网站访问统计</li>
+<li>数据过期处理</li>
+<li>应用排行榜</li>
+<li>分布式集群架构中的session分离</li>
+</ul>
+</li>
+</ul>
+<h2 id="Redis的下载与安装"><a href="#Redis的下载与安装" class="headerlink" title="Redis的下载与安装"></a>Redis的下载与安装</h2><ul>
+<li>首先让我们来看一下怎么安装<ul>
+<li>注意是在Linux环境下嗷 然后就这样跟着做就好啦 φ(&gt;ω&lt;*)<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181002193656335.png" alt=""></li>
+<li>安装<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181002193740451.png" alt=""></li>
+</ul>
+</li>
+<li>然后要怎么启动呢？<ul>
+<li>进入到我们指定的目录下的redis目录里面<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181002193925543.png" alt=""></li>
+<li>会发现有一个bin文件（用来存放可执行命令），进入它<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181002194030493.png" alt=""></li>
+<li>回到家目录，进入解压后的文件，找到redis.conf<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181002194303302.png" alt=""></li>
+<li>将它拷贝到安装目录下 ：<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181002194347366.png" alt=""></li>
+<li>然后就配置成功啦 让我们启动一下 ：<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181002233843315.png" alt=""></li>
+</ul>
+</li>
+<li>但是！这样子前端启动（好像是这么叫？）的话，就不能做其他操作了！超级不方便，所以我们最好采用另一种方式 ：后端启动（好像<ul>
+<li>进入redis.conf，找到这一行，然后把原本的no改为yes<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-2018100219583635.png" alt=""></li>
+<li>然后就完成啦！再启动一下（注意要让它在前端启动的基础上加载配置文件，也就是后面跟的那点）：<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181002200229702.png" alt=""></li>
+<li>最后确认一下，就可以看到它已经成功在后台启动啦 ：<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181002200437452.png" alt=""></li>
+</ul>
+</li>
+<li>那么问题来了，我们要怎么停止它呢？<ul>
+<li>像这样，进入bin目录下的客户端（redis-cli），shutdown它，再检查一下，就会发现这个进程已经不存在啦<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181002200935793.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<h2 id="Jedis的使用"><a href="#Jedis的使用" class="headerlink" title="Jedis的使用"></a>Jedis的使用</h2><ul>
+<li>首先确认一下它是能用的 ：<ul>
+<li>后台启动redis后，进入bin下的客户端，给它发个ping的消息；客户端回个PONG，就说明连接正常，可以使用啦 φ(&gt;ω&lt;*)<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181002202331591.png" alt=""></li>
+</ul>
+</li>
+<li><p>写<del>（照搬）</del>个小demo试验一下</p>
+<ul>
+<li>比如说这样写 ：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置IP地址和端口号</span></span><br><span class="line">Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">"192.168.43.163"</span>,<span class="number">6379</span>);</span><br><span class="line"><span class="comment">// 保存数据</span></span><br><span class="line">jedis.set(<span class="string">"name"</span>,<span class="string">"kangna"</span>);</span><br><span class="line"><span class="comment">// 获取数据</span></span><br><span class="line">String valueOfName = jedis.get(<span class="string">"name"</span>);</span><br><span class="line">System.out.println( <span class="string">"valueOfName = "</span> + valueOfName);</span><br><span class="line"><span class="comment">// 释放资源</span></span><br><span class="line">jedis.close();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>然后试着用idea连一下：</p>
+<ul>
+<li>首先vim /etc/sysconfig/iptables 设置一下防火墙<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181003162259655.png" alt=""></li>
+<li>进来之后找到上面那行，yy(复制) + p(粘贴)，改一下端口号<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181003162119996.png" alt=""></li>
+<li>然后重启我们的防火墙<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181003162239756.png" alt=""></li>
+<li>但是还是报错了！为什么呢为什么呢？<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181003165047176.png" alt=""></li>
+</ul>
+</li>
+<li>好像是说redis默认只能localhost登录，所以需要开启远程登录 ：<ul>
+<li>将proteced-mode(保护模式)设置为no<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181003164642925.png" alt=""></li>
+<li>然后注释掉 bind 127.0.0.1 这行<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181003164707775.png" alt=""></li>
+<li>最后重启redis，然后回idea运行一下，就可以看见我们的老婆了！<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181003170803947.png" alt=""></li>
+</ul>
+</li>
+<li>那那那能不能用连接池呢？当然是可以的！<ul>
+<li>就直接这样子 ：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取连接池配置对象</span></span><br><span class="line">       JedisPoolConfig poolConfig = <span class="keyword">new</span> JedisPoolConfig();</span><br><span class="line">       <span class="comment">// 然后设置一下，比如最大连接数、最大空闲连接数什么的</span></span><br><span class="line">       poolConfig.setMaxTotal(<span class="number">20</span>);</span><br><span class="line">       poolConfig.setMaxIdle(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 获取连接池</span></span><br><span class="line">       JedisPool jedisPool = <span class="keyword">new</span> JedisPool(poolConfig,<span class="string">"192.168.43.163"</span>,<span class="number">6379</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 获取Jedis对象</span></span><br><span class="line">       Jedis jedis = <span class="keyword">null</span>;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           <span class="comment">// 通过连接池获取连接</span></span><br><span class="line">           jedis = jedisPool.getResource();</span><br><span class="line"></span><br><span class="line">           <span class="comment">// 然后就是各种操作啦</span></span><br><span class="line"></span><br><span class="line">       &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">           <span class="comment">// 最后关闭资源</span></span><br><span class="line">           <span class="keyword">if</span>(jedis != <span class="keyword">null</span>) &#123;</span><br><span class="line">               jedis.close();</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span>(jedisPool != <span class="keyword">null</span>) &#123;</span><br><span class="line">               jedisPool.close();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Redis的数据结构"><a href="#Redis的数据结构" class="headerlink" title="Redis的数据结构"></a>Redis的数据结构</h2><ul>
+<li><strong>字符串（String）常用命令 ：</strong><ul>
+<li>set [key] [value]<ul>
+<li>设置指定key的值<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004165312518.png" alt=""></li>
+</ul>
+</li>
+<li>get [key]<ul>
+<li>获取指定key的值<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004165332774.png" alt=""></li>
+</ul>
+</li>
+<li>getset [key] [value]<ul>
+<li>将给定key的值设为value，并返回之前的值<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004165911522.png" alt=""></li>
+<li>注 ：用set直接改值的话，返回的是OK<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004170321596.png" alt=""></li>
+</ul>
+</li>
+<li>setnx [key] [value]<ul>
+<li>只在key不存在的时候设置key的值<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004175408994.png" alt=""></li>
+</ul>
+</li>
+<li>getrange [key] [start] [end]<ul>
+<li>返回字符串值中的子字符串<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004165443674.png" alt=""></li>
+</ul>
+</li>
+<li>mget [key1] [key2] […]<ul>
+<li>一次获取多个key的值（不存在的话就返回nil(相当于null)嘛）<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004173835570.png" alt=""></li>
+</ul>
+</li>
+<li>mset [key1] [value1] [key2] [value2] […] […]<ul>
+<li>同时设置多个键值对<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004190502191.png" alt=""></li>
+</ul>
+</li>
+<li>del [key] / del [key1] [key2] […]<ul>
+<li>删除单个或多个键值对，直接在后面跟要删的key就好啦<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004194935467.png" alt=""></li>
+<li>回注 ：del感觉超级强大好像每个类型的都能删诶..<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005132100520.png" alt=""></li>
+</ul>
+</li>
+<li>incr/decr [key]<ul>
+<li>将key中储存的数字值+1<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004192123969.png" alt=""></li>
+</ul>
+</li>
+<li>incrby/decrby [key] [increment]<ul>
+<li>将key中所储存的数字值加上给定值<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004193112996.png" alt=""></li>
+</ul>
+</li>
+<li>incrbyfloat [key] [increment]<ul>
+<li>将key中所储存的数字值加上给定浮点数值<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004193730953.png" alt=""></li>
+<li>注 ：浮点数要减的话，就直接加一个负的，比如这样 ：<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-2018100419404146.png" alt=""></li>
+</ul>
+</li>
+<li>append [key] [append-value]<ul>
+<li>在key中所储存的字符串末尾追加一个新字符串<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004194544908.png" alt=""></li>
+<li>注 ：最好用双引号括起来，不然会连在一起的！</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>哈希（hash）常用命令 ：</strong><ul>
+<li>hset [key] [field] [value]<ul>
+<li>设置指定key中指定field(属性)的值<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004204541679.png" alt=""></li>
+</ul>
+</li>
+<li>hmset [key] [field1] [value1] [field2] [value2] […]<ul>
+<li>一次为指定key中多个属性设置对应的值<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-2018100420475944.png" alt=""></li>
+</ul>
+</li>
+<li>hget [key] [field]<ul>
+<li>获取指定key中某一属性的值<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004204944407.png" alt=""></li>
+</ul>
+</li>
+<li>hmget [key] [filed1] [field2] […]<ul>
+<li>获取指定key中多个属性的值<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004205047644.png" alt=""></li>
+</ul>
+</li>
+<li>hgetall [key]<ul>
+<li>获取指定key中各个属性即其对应值<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004205130625.png" alt=""></li>
+</ul>
+</li>
+<li>hdel [key] [field1] [field2] […]<ul>
+<li>删除指定key中一个或多个属性<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-2018100420562989.png" alt=""><br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004205612953.png" alt=""></li>
+</ul>
+</li>
+<li>del [key1] [key2] […]<ul>
+<li>直接删除指定的一个或多个key<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004205837627.png" alt=""><br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004205822843.png" alt=""></li>
+</ul>
+</li>
+<li>hincrby [key] [field] [increment]<ul>
+<li>将key中存储的数字加上给定值<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004211301320.png" alt=""></li>
+</ul>
+</li>
+<li>hexists [key] [field]<ul>
+<li>判断指定key中某个属性是否存在<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004211421139.png" alt=""></li>
+</ul>
+</li>
+<li>hlen [key]<ul>
+<li>获取指定key中的全部属性的数量<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004211533153.png" alt=""></li>
+</ul>
+</li>
+<li>hkeys [key]<ul>
+<li>获取指定key中的各个属性<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004211623481.png" alt=""></li>
+</ul>
+</li>
+<li>hvals [key]<ul>
+<li>获取指定key中各个属性的值<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004211701935.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>字符串列表（list）常用命令 ：</strong><ul>
+<li>lpush/rpush [list] [arg1] [arg2] […]<ul>
+<li>从左边/右边向链表中添加元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004213506946.png" alt=""></li>
+<li>注 ：是从左边添加，不是从左向右添加；从右边同理</li>
+</ul>
+</li>
+<li>lrange [list] [start] [end]<ul>
+<li>查看列表中从start到end的元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004213332414.png" alt=""></li>
+<li>注 ：如果想查看所有元素，用0到-1就可以了</li>
+</ul>
+</li>
+<li>lpop/rpop [list]<ul>
+<li>弹出该链表左边/右边的第一个元素（弹出了就没有了）<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-2018100421400201.png" alt=""></li>
+</ul>
+</li>
+<li>llen [list]<ul>
+<li>返回指定list中的元素个数<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004214230623.png" alt=""></li>
+</ul>
+</li>
+<li>lpushx/rpushx [list] [arg]<ul>
+<li>向该链表左端/右端插入指定元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004214524854.png" alt=""></li>
+</ul>
+</li>
+<li>lrem [list] 0 [arg]<ul>
+<li>删除该链表中的所有指定元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004215012130.png" alt=""></li>
+</ul>
+</li>
+<li>lset [list] [index] [arg]<ul>
+<li>将list中某一角标的值改写为指定值<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004215328646.png" alt=""></li>
+</ul>
+</li>
+<li>linsert [list] before/after [arg] [inserted-arg]<ul>
+<li>在list中的第一个指定元素之前/后插入某一元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004215937845.png" alt=""></li>
+</ul>
+</li>
+<li>rpoplpush [list1] [list2]<ul>
+<li>将list1的右边元素弹出，并压入到list2的左边<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181004220406162.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>字符串集合（set）常用命令 ：</strong><ul>
+<li>sadd [set] [arg1] [arg2] […]<ul>
+<li>向集合中添加元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005121311250.png" alt=""></li>
+<li>注 ：重复的元素是加不进去的！比如这样 ：<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005121341748.png" alt=""></li>
+</ul>
+</li>
+<li>srem [set] [arg1] [arg2] […]<ul>
+<li>删除集合中的一个或多个元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005121620505.png" alt=""></li>
+</ul>
+</li>
+<li>smembers [set]<ul>
+<li>查看该集合中的全部元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005121659343.png" alt=""></li>
+</ul>
+</li>
+<li>sismember [set] [arg]<ul>
+<li>判断某个元素是否在该集合中<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005121746651.png" alt=""></li>
+</ul>
+</li>
+<li>sdiff [set1] [set2]<ul>
+<li>返回给定集合之间的差集（与给定顺序相关）<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005122054457.png" alt=""></li>
+<li>注 ：准确来说是返回”在前一个set中存在，但在后一个set中不存在”的元素 ：<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005122315915.png" alt=""></li>
+</ul>
+</li>
+<li>sinter [set1] [set2]<ul>
+<li>返回给定集合之间的交集（与给定顺序无关）<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005122509155.png" alt=""></li>
+</ul>
+</li>
+<li>sunion [set1] [set2]<ul>
+<li>返回给定集合之间的并集（与给定顺序稍微有关）<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005122704741.png" alt=""></li>
+</ul>
+</li>
+<li>sdiffstore/sinterstore/sunionstore [newSet] [set1] [set2]<ul>
+<li>将给定集合之间的差集/交集/并集存入一个新的集合<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005131018977.png" alt=""></li>
+</ul>
+</li>
+<li>scard [set]<ul>
+<li>返回给定集合中的元素个数<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005130705273.png" alt=""></li>
+</ul>
+</li>
+<li>srandmember [set]<ul>
+<li>随机返回一个给定集合中的元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005130745473.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>有序字符串集合（sorted set）常用命令 ：</strong><ul>
+<li>zadd [zset] [score1] [arg1] [score2] [arg2] […]<ul>
+<li>向指定集合中添加元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005133229505.png" alt=""></li>
+<li>注 ：如果添加已存在的元素，会直接覆盖，并且返回0<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005133335159.png" alt=""></li>
+</ul>
+</li>
+<li>zscore [zset] [arg]<ul>
+<li>返回指定集合中某个元素对应的分数<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005134709221.png" alt=""></li>
+</ul>
+</li>
+<li>zcard [zset]<ul>
+<li>返回指定集合中的元素个数<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005134759648.png" alt=""></li>
+</ul>
+</li>
+<li>zrem [zset] [arg1] [arg2] […]<ul>
+<li>移除指定集合中的一个或多个元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005134852714.png" alt=""></li>
+</ul>
+</li>
+<li>zrange [zset] [start] [end] (withscores)<ul>
+<li>按分数排序(默认从小到大)返回指定集合中从start到end的元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005135212516.png" alt=""></li>
+<li>注 ：如果用zrevrange的话就是从大到小排序<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005135402182.png" alt=""></li>
+</ul>
+</li>
+<li>zremrangebyrank [zset] [start] [end]<ul>
+<li>删除指定集合中按分数排序后从start到end的元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005140112230.png" alt=""></li>
+</ul>
+</li>
+<li>zremrangebyscore [zset] [min] [max]<ul>
+<li>删除指定集合中分数在min到max区间内的元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005140600709.png" alt=""></li>
+</ul>
+</li>
+<li>zrangebyscore [zset] [min] [max] (withscores) (limit [offset] [count])<ul>
+<li>返回指定集合中，分数在min到max区间内的元素<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005140955271.png" alt=""></li>
+<li>注 ：limit表示从offset开始，往后取count个元素（类似于sql语句里面分页的那个limit）<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-2018100514172318.png" alt=""></li>
+</ul>
+</li>
+<li>zincrby [zset] [increment] [arg]<ul>
+<li>为集合中的指定元素增减分数<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005142044585.png" alt=""></li>
+</ul>
+</li>
+<li>zcount [zset] [min] [max]<ul>
+<li>返回该集合中指定区间内的元素个数<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-2018100514221051.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Redis中keys的通用操作"><a href="#Redis中keys的通用操作" class="headerlink" title="Redis中keys的通用操作"></a>Redis中keys的通用操作</h2><ul>
+<li><strong>常用命令如下 ：</strong><ul>
+<li>keys [通配符]<ul>
+<li>返回符合条件的所有keys<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005144615252.png" alt=""></li>
+</ul>
+</li>
+<li>del [key1] [key2] […]<ul>
+<li>删除指定的一个或多个key<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005144723377.png" alt=""></li>
+</ul>
+</li>
+<li>rename [key-name] [key-newName]<ul>
+<li>重命名这个key<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005144859374.png" alt=""></li>
+</ul>
+</li>
+<li>type [key]<ul>
+<li>得到这个key的类型<br><img src="/2018/10/05/Redis初体验/markdown-img-paste-20181005145032911.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Redis特性"><a href="#Redis特性" class="headerlink" title="Redis特性"></a>Redis特性</h2><ul>
+<li>多数据库</li>
+<li>事务</li>
+</ul>
+<h2 id="Redis持久化"><a href="#Redis持久化" class="headerlink" title="Redis持久化"></a>Redis持久化</h2><ul>
+<li><strong>持久化 ：</strong><ul>
+<li>将数据从内存同步到硬盘上的过程</li>
+</ul>
+</li>
+<li><strong>RDB(默认) ：</strong><ul>
+<li>每经过指定时间就写入一次</li>
+</ul>
+</li>
+<li><strong>AOF ：</strong><ul>
+<li>将执行过的写指令记录下来，在数据恢复时按照从前到后的顺序再将指令都执行一遍</li>
+</ul>
+</li>
+<li><strong>为什么写的这么敷衍 ：</strong><ul>
+<li>因为仙女学不动了（望天</li>
+</ul>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/redis/">redis</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/数据库系列/">数据库系列</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/10/05/Redis初体验/" data-title="Redis初体验 | 啾啾子的小博客" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/09/25/Netty初体验/"  title="Netty初体验">
+ <strong>NEXT:</strong><br/> 
+ <span>Netty初体验
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NoSQL概述"><span class="toc-number">1.</span> <span class="toc-text">NoSQL概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis概述"><span class="toc-number">2.</span> <span class="toc-text">Redis概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis的下载与安装"><span class="toc-number">3.</span> <span class="toc-text">Redis的下载与安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jedis的使用"><span class="toc-number">4.</span> <span class="toc-text">Jedis的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis的数据结构"><span class="toc-number">5.</span> <span class="toc-text">Redis的数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis中keys的通用操作"><span class="toc-number">6.</span> <span class="toc-text">Redis中keys的通用操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis特性"><span class="toc-number">7.</span> <span class="toc-text">Redis特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis持久化"><span class="toc-number">8.</span> <span class="toc-text">Redis持久化</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/Linux合集/" title="Linux合集">Linux合集<sup>4</sup></a></li>
+		
+			<li><a href="/categories/工具向整理/" title="工具向整理">工具向整理<sup>3</sup></a></li>
+		
+			<li><a href="/categories/数据库系列/" title="数据库系列">数据库系列<sup>1</sup></a></li>
+		
+			<li><a href="/categories/纸上谈系列/" title="纸上谈系列">纸上谈系列<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/JSP/" title="JSP">JSP<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>4</sup></a></li>
+		
+			<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+		
+			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/idea/" title="idea">idea<sup>1</sup></a></li>
+		
+			<li><a href="/tags/maven/" title="maven">maven<sup>1</sup></a></li>
+		
+			<li><a href="/tags/netty/" title="netty">netty<sup>1</sup></a></li>
+		
+			<li><a href="/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+		
+			<li><a href="/tags/servlet/" title="servlet">servlet<sup>1</sup></a></li>
+		
+			<li><a href="/tags/webSocket/" title="webSocket">webSocket<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://a-limon.github.io/pacman/hello/introducing-pacman-theme/#" target="_blank" title="Pacman">Pacman</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 我们的目标是！ <br/>
+			早睡早起，不掉头发！</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com//" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com//" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/yuanLier" target="_blank" title="github"></a>
+		
+		
+		<a href="https://www.facebook.com//" target="_blank" title="facebook"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="yuanLier">yuanLier</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:""};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"position":"right","width":120,"height":240},"mobile":{"show":true},"log":false});</script></body>
+</html>

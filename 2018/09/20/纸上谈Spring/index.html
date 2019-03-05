@@ -1,0 +1,519 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>纸上谈Spring | 啾啾子的小博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="yuanLier">
+    
+    <meta name="description" itemprop="description" content="因aop迟迟上不了手练习导致的·强行被加入纸上谈系列的·可怜spring">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="/" />
+    <meta name="twitter:title" content="纸上谈Spring | 啾啾子的小博客" />
+      
+        <meta name="twitter:description" content="因aop迟迟上不了手练习导致的·强行被加入纸上谈系列的·可怜spring" />
+      
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="啾啾子的小博客" title="啾啾子的小博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="啾啾子的小博客">啾啾子的小博客</a></h1>
+				<h2 class="blog-motto">又名 啾啾子·不知道瞎写了些啥玩意·的小博客</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/09/20/纸上谈Spring/" title="纸上谈Spring" itemprop="url">纸上谈Spring</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="yuanLier">yuanLier</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-09-20T15:09:36.000Z" itemprop="datePublished">2018-09-20</time>
+    Updated:<time datetime="2018-10-05T10:03:59.893Z" itemprop="dateModified">2018-10-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#高内聚、低耦合"><span class="toc-number">1.</span> <span class="toc-text">高内聚、低耦合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向接口编程"><span class="toc-number">2.</span> <span class="toc-text">面向接口编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IOC容器"><span class="toc-number">3.</span> <span class="toc-text">IOC容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-的注入方式"><span class="toc-number">4.</span> <span class="toc-text">Spring 的注入方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bean-：-IOC容器中的对象"><span class="toc-number">5.</span> <span class="toc-text">bean ： IOC容器中的对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AOP-：面向切面编程"><span class="toc-number">6.</span> <span class="toc-text">AOP ：面向切面编程</span></a></li></ol>
+		</div>
+		
+		<h2 id="高内聚、低耦合"><a href="#高内聚、低耦合" class="headerlink" title="高内聚、低耦合"></a>高内聚、低耦合</h2><ul>
+<li>内聚性：指一个模块内各元素之间紧密结合的程度<br><em>一个模块内各元素之间联系得越紧密，内聚性越高</em></li>
+<li>低耦合：指一个系统中各模块之间紧密需要的程度<br><em>各模块间的联系越紧密，其耦合性越强，独立性越差</em></li>
+</ul>
+<h2 id="面向接口编程"><a href="#面向接口编程" class="headerlink" title="面向接口编程"></a>面向接口编程</h2><ul>
+<li>在结构设计中的层次及调用关系：<br>每层只向外(上层)提供一组功能接口，各层之间仅依赖接口，而非依赖于接口的具体实现类</li>
+<li>要求接口实现的变动不影响各层之间的调用</li>
+<li>用接口定义对象，new它的实体类<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OneInterface one = <span class="keyword">new</span> OneInterfaceImpl;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="IOC容器"><a href="#IOC容器" class="headerlink" title="IOC容器"></a>IOC容器</h2><ul>
+<li>IOC ：控制反转<br>指控制权的转移，使获得依赖对象的过程被反转（由自身管理变成了IOC容器的主动注入）</li>
+<li>DI ：依赖注入<br>IOC的实现方法，指在程序运行期间，动态地将某种依赖关系注入到容器当中</li>
+<li>跟房屋中介的对比嘿嘿<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180725174715338.png" alt=""></li>
+</ul>
+<h2 id="Spring-的注入方式"><a href="#Spring-的注入方式" class="headerlink" title="Spring 的注入方式"></a>Spring 的注入方式</h2><ul>
+<li>Spring 注入是指在启动 Spring 容器加载 bean 配置的时候，就完成对变量的赋值的行为</li>
+<li>设值注入 ：对应 set 方法<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180725203806913.png" alt=""><br>即 injectionService 中有一个 injectionDAO 的属性，然后当你有一个 setInjectionDAO 的方法时，spring 就会自动帮你把 injectionDAO 的值注入进去啦</li>
+<li>构造注入 ：对应构造器<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180725204321985.png" alt=""><br>同上，但此时要求 InjectionSercive 这个类里面要有一个参数为 injectionDAO（大小写必须完全一致）的构造器</li>
+<li>注意注意：<br>property 中的 name 对应 injectionService 中该属性的名称；其 ref 对应该属性的类型在 bean 中的 id</li>
+<li>最后附上两种构造方式对应的java代码 ：<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180725210244577.png" alt=""><br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180725210214672.png" alt=""></li>
+</ul>
+<h2 id="bean-：-IOC容器中的对象"><a href="#bean-：-IOC容器中的对象" class="headerlink" title="bean ： IOC容器中的对象"></a>bean ： IOC容器中的对象</h2><ul>
+<li><strong>bean 的配置项</strong><ul>
+<li>id ：在整个IOC容器中bean的唯一标识</li>
+<li>class ：具体要实例化bean的那个类</li>
+<li>scope ：bean的范围，即作用域</li>
+<li>constructor argument ：构造器参数</li>
+<li>properties ：该个bean中所包含的属性</li>
+<li>autowiring mode ：自动装载模式</li>
+<li>lazy-initialization mode ：懒加载模式</li>
+<li>initialization method ：初始化方式</li>
+<li>destruction method ：销毁方式</li>
+</ul>
+</li>
+<li><strong>bean 的作用域</strong><ul>
+<li>singleton ：单例，指一个bean容器中只存在一份该bean</li>
+<li>prototype ：每次请求（使用）都会创建新的实例</li>
+<li>request / session ：每次http请求都创建一个新实例，且仅在当前 request / session 内有效</li>
+</ul>
+</li>
+<li><strong>bean 的生命周期</strong><ul>
+<li>定义 ：在xml中配置的bean</li>
+<li>初始化 ：生成bean的实例</li>
+<li>使用 ：从bean容器中取出实例并使用</li>
+<li>销毁 ：销毁当前实例</li>
+<li>注 ：可以直接配置全局的初始化 &amp; 销毁方法<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180725213228618.png" alt=""><br><em>别忘了在xml中配置完成之后还要写对应java代码中的方法哟</em></li>
+<li>注2 ：实现 InitialMethod 和 DestroyMethod 接口时，此间指定的方法要先于我们自己在 xml 中为个体 bean 配置的 init-method 和 destroy-method 执行；且均会覆盖全局性的默认方法</li>
+</ul>
+</li>
+<li><strong>bean 的自动装配</strong><br>此时则不需要使用property或constructor-arg啦<ul>
+<li>no ：不做任何操作</li>
+<li>byName ：当将 auto-wire 属性设置为 byName 时，Spring 将尝试将该属性与配置文件中具有相同 id 的 beans 进行匹配和连接。若找到匹配项，则注入该 bean；反之，则抛出异常</li>
+<li>byType ：跟 byName 差不多，只是将要查找的匹配的对象的范围从名称变成了类型(可以理解为从对应的 id 变成了 class )</li>
+</ul>
+</li>
+<li><strong>类的自动检测及 bean 的注册</strong><ul>
+<li>类的自动检测 ：<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180725223717720.png" alt=""></li>
+<li>使用过滤器进行自定义扫描 ：<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180725224349749.png" alt=""><br>注：include-filter ：”包含”过滤器；<br>　　exclude-filter ：”排除”过滤器；</li>
+<li>使用注解定义 bean ：<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180725224927411.png" alt=""></li>
+</ul>
+</li>
+<li><strong>使用 @Autowired 注解</strong><ul>
+<li>@Required 注解 ：适用于 bean 属性的 setter 方法，该注解表示受影响的 bean 属性必须在配置时就被填充，即通过 bean 定义或通过自动装配得到一个明确的属性值</li>
+<li>@Autowired 注解 ：<ul>
+<li>既可以用在 setter 方法上，又可以用在构造器上；</li>
+<li>默认情况下若找不到合适的 bean，将会导致自动装配失败，抛出异常；</li>
+<li>可以通过将其 required 属性标注为 false 来避免；</li>
+<li>每个类只能有一个构造器被标记为 required=true，故想要装配的必要属性建议使用 @Required 注解<del>(别了)</del></li>
+</ul>
+</li>
+<li>对 List/Set 使用 @Autowired :<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180723211705878.png" alt=""><br>即将该接口的全部具体实现类依次装载进list<br>注：若希望数组有序，可使用 @Order(int) 注解</li>
+<li>对 Map 使用 @Autowired ：<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180723212736741.png" alt=""><br>key、value分别对应类的实例和该具体的类</li>
+</ul>
+</li>
+<li><strong>终于到了 @Bean 注解</strong><ul>
+<li>就和 &lt; bean &gt;&lt; / bean &gt; 是一样的</li>
+<li>@Bean(name=”xx”) 即对应 xml 配置中的 id</li>
+<li>可以使用 @Scope 设置bean的作用范围</li>
+<li>@Configuration 标注在类上，相当于把该类作为 xml 配置文件中的 <beans></beans></li>
+<li>@Bean 标注在方法上（但要注意是某个返回实例的方法），等价于 xml 配置中的 &lt; bean &gt;<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180726091236517.png" alt=""><br>或者参考这个来进行理解：<br><a href="https://blog.csdn.net/javaloveiphone/article/details/52182899" target="_blank" rel="noopener">https://blog.csdn.net/javaloveiphone/article/details/52182899</a></li>
+<li>当然啦，既然 @Bean 的作用是注册 bean 对象，那么完全可以使用 @Component、 @Controller、 @Service、 @Ripository 等注解，注意要配置 @ComponentScan 进行自动扫描</li>
+</ul>
+</li>
+<li><strong>spring 中的资源文件</strong><ul>
+<li>首先来放一张图<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180726085943572.png" alt=""><br>property-placeholder : 对应一个资源文件<br>location : 对应资源文件的具体位置<br>整体作用 ：即是用来加载资源文件的啦</li>
+<li>这是使用配置文件的情况<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180726090410995.png" alt=""></li>
+<li>这是使用注解的情况<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180726090532278.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<h2 id="AOP-：面向切面编程"><a href="#AOP-：面向切面编程" class="headerlink" title="AOP ：面向切面编程"></a>AOP ：面向切面编程</h2><ul>
+<li><strong>AOP 的相关概念</strong><ul>
+<li>切面（Aspect）：<br>一个关注点的模块化，可以横切多个对象</li>
+<li>连接点（Joinpoint）:<br>程序执行过程中某个特定的节点</li>
+<li>通知（Advice）：<br>在切面的某个特定连接点上执行的动作</li>
+<li>切入点（Pointcut）：<br>用来匹配具体的连接点</li>
+<li>引入（Introduction）：<br>在类的外部为类添加新的方法和属性</li>
+<li>目标对象（Target Object）：<br>被一个或多个切面所通知的对象</li>
+<li>AOP代理（AOP Proxy）：<br>AOP框架创建的对象，用来实现切面契约</li>
+<li>切面契约（Aspect Contract）：<br>可以用来通知方法的执行等</li>
+<li>织入（Weaving）：<br>将切面与具体的应用程序类型或对象相连接，并创建一个被通知的对象；分为：编译时织入、类加载时织入、执行时织入</li>
+</ul>
+</li>
+<li><strong>Advice（通知）的类型</strong><ul>
+<li>前置通知（Before advice）：<br>在某连接点之前执行的通知</li>
+<li>返回后通知（After returning advice）：<br>在某连接点正常完成后所执行的通知</li>
+<li>抛出异常后通知（After throwing advice）：<br>在方法抛出异常退出时所执行的通知</li>
+<li>后通知（After/Finally advice）：<br>当某连接点退出的时候执行的通知（不论该连接点是正常返回还是异常退出，均会执行后通知）</li>
+<li>环绕通知（Around advice）：<br>包围一个连接点(joinpoint)的通知</li>
+</ul>
+</li>
+<li><strong>配置切面 Aspect</strong><ul>
+<li>Spring 中所有的切面和通知器都必须放在一个&lt; aop:config &gt; 里面（可以配置包含多个 &lt; aop:config &gt; 元素），每一个 &lt; aop:config &gt; 中可以包含 pointcut、advisor 和 aspect 元素，但要注意的是它们必须按照这个顺序进行声明</li>
+<li>比如这样子：<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180726133756773.png" alt=""></li>
+</ul>
+</li>
+<li><strong>配置切入点 Pointcut</strong><ul>
+<li>常用的切入点表达式：<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180726133536648.png" alt=""></li>
+<li>其他的可以在需要用到的时候再查文档嘛</li>
+</ul>
+</li>
+<li><strong>Advice的综合应用</strong><ul>
+<li>前置通知的 xml 配置：<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180726134949322.png" alt=""><br>该通知对应的具体动作：<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180726134415707.png" alt=""><br>程序自然运行到切点处要执行的方法：<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180726134740455.png" alt=""><br>最终运行的结果：<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180726134834223.png" alt=""></li>
+<li>其他的就跟前置通知操作过程差不多了啦</li>
+<li>啊对还有一个特殊的-Around advice ：<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180726135634539.png" alt=""><br>其中，”obj = pjp.proceed();” 代表程序自然运行到切点处要执行的方法，然后我们就可以在它周围进行环绕，比如这样：<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180726135936565.png" alt=""><br>最后输出的结果为：<br><img src="/2018/09/20/纸上谈Spring/markdown-img-paste-20180726140122348.png" alt=""></li>
+<li>另外还可以在通知里面使用参数<br><a href="https://www.jianshu.com/p/ff8d0cd69a7e" target="_blank" rel="noopener">https://www.jianshu.com/p/ff8d0cd69a7e</a></li>
+</ul>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Spring/">Spring</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/纸上谈系列/">纸上谈系列</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/09/20/纸上谈Spring/" data-title="纸上谈Spring | 啾啾子的小博客" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2018/09/20/纸上谈servlet/" title="纸上谈servlet">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  纸上谈servlet</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/09/20/纸上谈反射/"  title="纸上谈反射">
+ <strong>NEXT:</strong><br/> 
+ <span>纸上谈反射
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#高内聚、低耦合"><span class="toc-number">1.</span> <span class="toc-text">高内聚、低耦合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向接口编程"><span class="toc-number">2.</span> <span class="toc-text">面向接口编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IOC容器"><span class="toc-number">3.</span> <span class="toc-text">IOC容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-的注入方式"><span class="toc-number">4.</span> <span class="toc-text">Spring 的注入方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bean-：-IOC容器中的对象"><span class="toc-number">5.</span> <span class="toc-text">bean ： IOC容器中的对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AOP-：面向切面编程"><span class="toc-number">6.</span> <span class="toc-text">AOP ：面向切面编程</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/Linux合集/" title="Linux合集">Linux合集<sup>4</sup></a></li>
+		
+			<li><a href="/categories/工具向整理/" title="工具向整理">工具向整理<sup>3</sup></a></li>
+		
+			<li><a href="/categories/数据库系列/" title="数据库系列">数据库系列<sup>1</sup></a></li>
+		
+			<li><a href="/categories/纸上谈系列/" title="纸上谈系列">纸上谈系列<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/JSP/" title="JSP">JSP<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>4</sup></a></li>
+		
+			<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+		
+			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/idea/" title="idea">idea<sup>1</sup></a></li>
+		
+			<li><a href="/tags/maven/" title="maven">maven<sup>1</sup></a></li>
+		
+			<li><a href="/tags/netty/" title="netty">netty<sup>1</sup></a></li>
+		
+			<li><a href="/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+		
+			<li><a href="/tags/servlet/" title="servlet">servlet<sup>1</sup></a></li>
+		
+			<li><a href="/tags/webSocket/" title="webSocket">webSocket<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://a-limon.github.io/pacman/hello/introducing-pacman-theme/#" target="_blank" title="Pacman">Pacman</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 我们的目标是！ <br/>
+			早睡早起，不掉头发！</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com//" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com//" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/yuanLier" target="_blank" title="github"></a>
+		
+		
+		<a href="https://www.facebook.com//" target="_blank" title="facebook"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="yuanLier">yuanLier</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:""};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"position":"right","width":120,"height":240},"mobile":{"show":true},"log":false});</script></body>
+</html>

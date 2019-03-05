@@ -1,0 +1,704 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Linux第二弹 | 啾啾子的小博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="yuanLier">
+    
+    <meta name="description" itemprop="description" content="正儿八经的Linux第二弹">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="/" />
+    <meta name="twitter:title" content="Linux第二弹 | 啾啾子的小博客" />
+      
+        <meta name="twitter:description" content="正儿八经的Linux第二弹" />
+      
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="啾啾子的小博客" title="啾啾子的小博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="啾啾子的小博客">啾啾子的小博客</a></h1>
+				<h2 class="blog-motto">又名 啾啾子·不知道瞎写了些啥玩意·的小博客</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/09/20/Linux第二弹/" title="Linux第二弹" itemprop="url">Linux第二弹</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="yuanLier">yuanLier</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-09-20T14:58:09.000Z" itemprop="datePublished">2018-09-20</time>
+    Updated:<time datetime="2018-10-05T10:04:32.611Z" itemprop="dateModified">2018-10-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#VIM文本编辑器"><span class="toc-number">1.</span> <span class="toc-text">VIM文本编辑器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#磁盘管理"><span class="toc-number">2.</span> <span class="toc-text">磁盘管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户管理"><span class="toc-number">3.</span> <span class="toc-text">用户管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#又到了幸福的结尾时间"><span class="toc-number">4.</span> <span class="toc-text">又到了幸福的结尾时间</span></a></li></ol>
+		</div>
+		
+		<h2 id="VIM文本编辑器"><a href="#VIM文本编辑器" class="headerlink" title="VIM文本编辑器"></a>VIM文本编辑器</h2><ul>
+<li><strong>VI是什么？</strong><ul>
+<li>即 Visual Interface，一个可视化接口</li>
+<li>类似 Windows 的记事本</li>
+</ul>
+</li>
+<li><strong>VIM是什么？</strong><ul>
+<li>VI的升级版</li>
+<li>支持多级撤销（u）</li>
+<li>可跨平台运行</li>
+<li>支持语法高亮</li>
+<li>支持图形界面</li>
+</ul>
+</li>
+<li><strong>VIM编辑器的操作模式</strong><ul>
+<li>VIM编辑器的三种操作模式 ：<ul>
+<li>Conmand Mode 命令模式</li>
+<li>Insert Mode 输入模式</li>
+<li>Last Line Mode 底行模式</li>
+</ul>
+</li>
+<li>就比如说 ：<ul>
+<li>你用 vim abc 创建并打开了一个abc<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180910205939427.png" alt=""><br>此时，默认处于命令模式，即无法直接写入东西</li>
+<li>然后，让我们输入一个命令 ：i（即insert）<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180910210119140.png" alt=""><br>这样它就从命令模式变成了输入模式啦！</li>
+<li>输入完成后，按一下 Esc（退出输入模式），再输入 :wq（保存并退出文件编辑）：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180910210334196.png" alt=""><br>然后就变成了底行模式 –&gt; 最后回车执行命令</li>
+<li>让我们来查看一下是否有正确输入并保存 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180910210625880.png" alt=""><br>就很完美 ( • ̀ω•́ )✧</li>
+</ul>
+</li>
+<li>底行模式和命令模式的区别 ：</li>
+<li>底行模式 ：输入的命令会在底行显示，且必须按下回车才会执行</li>
+<li>命令模式 ：输入的命令不会显示，并且即输即执行</li>
+</ul>
+</li>
+<li><strong>VIM编辑器的命令格式</strong><ul>
+<li>最基础的命令格式 ：<ul>
+<li>基本格式 ：vim [文件名]</li>
+<li>作用 ：直接进入文件，以进行后续操作</li>
+</ul>
+</li>
+<li>进入时的各种光标定位 ：<ul>
+<li>定位到最后一行 ：vim + [文件名]<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180910211424585.png" alt=""></li>
+<li>定位到指定某一行 ：vim +行数 [文件名]<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180910211526599.png" alt=""></li>
+</ul>
+</li>
+<li>查找某个单词第一次出现的那行 ：<ul>
+<li>基本格式 ：vim +/单词 [文件名]</li>
+<li>比如说我们来查找 ooo ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180910212423424.png" alt=""></li>
+<li>但是呢，再一次使用这个命令的时候，我们会发现光标变了 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-2018091021251426.png" alt=""><br>为什么呢？因为光标是具有记忆功能的，它会记录你上次打开的位置，然后在此下的下面一行，这样子</li>
+<li>那我要怎么找到需要的那个 ooo 呢？可以这样 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180910212808613.png" alt=""><br>按 n 就可以在这几个单词之间来回切换啦</li>
+</ul>
+</li>
+<li>在多个文件中进行切换 ：<ul>
+<li>比如说我现在创建了 aa bb cc ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180910213050615.png" alt=""></li>
+<li>打开后会发现只进入了 aa ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180910213116409.png" alt=""></li>
+<li>那要怎么进入 bb cc 呢？底行命令 :n（跳转至下一个文件）：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-2018091021323910.png" alt=""></li>
+<li>那要怎么回到 aa 呢？底行命令 :N（回到上一个文件）：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180910213339607.png" alt=""></li>
+<li>然后就可以在各个文件中快乐地切换啦</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>底行模式及命令模式的常用操作</strong><ul>
+<li>底行模式 ：<ul>
+<li>:w 保存当前修改</li>
+<li>:q 退出当前文件</li>
+<li>:! 强制执行某一命令</li>
+<li>:wq 保存退出</li>
+<li>:q! 不保存，强制退出</li>
+<li>:ls 列出当前编辑器中打开的所有文件</li>
+<li>:n 切换到下一个文件</li>
+<li>:N 切换到上一个文件</li>
+<li>:数字 快速将光标定位到某行</li>
+<li>:/xxx 从光标位置向后搜索，将光标定位到搜索出的第一个xxx处</li>
+<li>?xxx 从光标位置向前搜索，将光标定位到搜索出的第一个xxx处</li>
+</ul>
+</li>
+<li>命令模式 ：<ul>
+<li>h 光标左移</li>
+<li>j 光标下移</li>
+<li>k 光标上移</li>
+<li>l 光标右移</li>
+<li>ctrl + f 向下翻页(front)</li>
+<li>ctrl + b 向上翻页(back)</li>
+<li>ctrl + d 向下翻半页(down)</li>
+<li>ctrl + u 向上翻半页(up)</li>
+<li>dd 删除光标所在行</li>
+<li>o 在光标所在行下方插入一行并切换到输入模式</li>
+<li>yy 复制光标所在行</li>
+<li>p 在光标所在行的下方粘贴</li>
+<li>P 在光标所在行放上方粘贴</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h2><ul>
+<li><strong>查看磁盘分区的使用状况 ：df</strong><ul>
+<li>基本格式 ：df [选项]</li>
+<li>选项 ：<ul>
+<li>-l 仅显示本地磁盘（默认）<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180911110836330.png" alt=""></li>
+<li>-a 显示所有文件系统（比如各种0字节分区）的磁盘使用情况<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180911110910677.png" alt=""></li>
+<li>-h 以1024进制显示磁盘容量<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180911111238938.png" alt=""></li>
+<li>-H 以1000进制显示磁盘容量<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180911111254749.png" alt=""></li>
+<li>-T 显示磁盘分区类型（即各个分区使用的文件系统）<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180911111316753.png" alt=""></li>
+<li>-t 显示指定类型文件系统的磁盘分区<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-2018091111205493.png" alt=""></li>
+<li>-x 显示除指定类型文件系统的之外的磁盘分区<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180911112121619.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>统计磁盘上文件的大小 ：du</strong><ul>
+<li>基本格式 ：du -s [选项] [文件名]</li>
+<li>选项 ：<ul>
+<li>-s 指定统计目标<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180911113546360.png" alt=""></li>
+<li>-b 以byte为单位统计文件<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180911113557983.png" alt=""></li>
+<li>-k 以KB为单位统计文件<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180911113645700.png" alt=""></li>
+<li>-m 以MB为单位统计文件<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180911113611616.png" alt=""></li>
+<li>-h 按照1024进制统计文件<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180911113622173.png" alt=""></li>
+<li>-H 按照1000进制统计文件<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180911113631171.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Linux中的MBR分区</strong><ul>
+<li>首先在虚拟机中创建一块新硬盘 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912081243897.png" alt=""></li>
+<li>然后就可以开始分区啦 ：<ul>
+<li>进行MBR分区要用到fdisk ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912081648920.png" alt=""></li>
+<li>通过 fdisk -l 查看详细信息 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912082156313.png" alt=""><br>可以看到新添加的磁盘是没有分区表的信息的</li>
+<li>通过 fdisk [设备路径] 来进入分区模式 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912082256358.png" alt=""></li>
+<li>输入 m 查看帮助信息 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912082409651.png" alt=""></li>
+<li>输入 n 添加新的分区 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912082509803.png" alt=""></li>
+<li>p为主分区，e为扩展分区，l为逻辑分区(这里没出现就是了)<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912083541551.png" alt=""></li>
+<li>然后把后面几个选择走一遍，一个主分区就分好啦~<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912083134909.png" alt=""></li>
+<li>备注备注，后面几个选择分别为 ：<ul>
+<li>指定分区编号</li>
+<li>指定扇区的起始位置</li>
+<li>指定扇区的终止位置（可以直接指定分区大小，比如这里的+3000M，就表示给这个分区指定3000M空间）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>同理，分好其他几个，输入p进行查看 ：<ul>
+<li>sdb1:主分区 sdb2:扩展分区 sdb5/sdb6:逻辑分区<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912084119177.png" alt=""></li>
+<li>备注 ：输入 d 可以按分区编号删除分区<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912084802973.png" alt=""><br>然后就可以重新分配啦</li>
+</ul>
+</li>
+<li>最后！输入 w 保存分区情况，再用 fdisk -l 查看一下 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912085240885.png" alt=""><br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912085302937.png" alt=""></li>
+<li>我们的MBR磁盘分区就完美分完啦 φ(&gt;ω&lt;*)</li>
+</ul>
+</li>
+<li><strong>MBR和GPT分区的区别 ：</strong><ul>
+<li>MBR ：<ul>
+<li>主分区不超过4个</li>
+<li>单个分区容量最大2TB</li>
+</ul>
+</li>
+<li>GPT ：<ul>
+<li>主分区数量几乎没有限制（最多128个）</li>
+<li>单个分区容量几乎没有限制（每个分区18EB）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Linux中的GPT分区</strong><ul>
+<li>同样，先加一块硬盘上去</li>
+<li>然后开始我们的GPT叭！<ul>
+<li>GPT要用到的是 parted ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-2018091213125994.png" alt=""></li>
+<li>输入 help 查看帮助文档 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912131412689.png" alt=""></li>
+<li>输入 select [设备路径] 切换磁盘 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912131533931.png" alt=""></li>
+<li>然后指定分区表类型（若为MBR，则跟 msdos）：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912131707883.png" alt=""></li>
+<li>输入 print 查看当前硬盘分区详情 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912132418898.png" alt=""></li>
+<li>或者，输入 print all 查看全部硬盘分区详情 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912132530848.png" alt=""><br>主要是让它感受一下自己只是一块没有分区表的野硬盘</li>
+</ul>
+</li>
+<li>然后就可以开始分区了，首先来看一下交互模式 ：<ul>
+<li>直接放个完整流程好了反正都是中文嘻嘻嘻 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912133545336.png" alt=""></li>
+<li>然后还可以用 print 确认一下 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912133637456.png" alt=""></li>
+<li>这里要解释一下为什么要从1而不是0开始 –&gt;<br>出于某种不可抗拒的原因，从0开始会出现一个这样的警告 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912133802321.png" alt=""><br>以至于不得不cancel掉（虽然其实好像是受4k对齐的影响，虽然其实我并不很懂4k对齐是啥）</li>
+</ul>
+</li>
+<li>然后感受一下命令模式 ：<ul>
+<li>依然是一张图 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912134406630.png" alt=""></li>
+</ul>
+</li>
+<li>最后 如果有哪里分得不太满意 –&gt; 就删除叭<ul>
+<li>命令为 rm [分区编号] ，就不截图啦</li>
+</ul>
+</li>
+<li>改成满意的之后，输入 quit 退出即可，不用专门保存辣</li>
+</ul>
+</li>
+<li><strong>Linux中分区的格式化 ：mkfs</strong><ul>
+<li>首先来看一下sdb磁盘分区在设备上的情况<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912200202365.png" alt=""></li>
+<li>然后就可以分别格式化sdb的几个分区了 ：<ul>
+<li>方法一 ：mkfs.[文件系统类型] [设备名称]<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912200642499.png" alt=""></li>
+<li>方法二 ：mkfs -t [文件系统类型] [设备名称]<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912200833929.png" alt=""></li>
+</ul>
+</li>
+<li>注意 ：<ul>
+<li>只有主分区和逻辑分区可以格式化，扩展分区不可以</li>
+<li>gbt硬盘的分区表只能通过启动 parted 查看</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Linux中的挂载分区</strong><ul>
+<li>分区默认的挂载目录 ：/mnt</li>
+<li>挂载 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912201423891.png" alt=""></li>
+<li>卸载（取消挂载）：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-2018091220154699.png" alt=""></li>
+<li>注意 ：<ul>
+<li>这个挂载是非永久性的，重启后就会失效</li>
+<li>如果想让它变成永久性的话，可以写入到/etc/fstab</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>给硬盘添加一个swap</strong><ul>
+<li>大致步骤如下 ：<ul>
+<li>建立一个普通的Linux分区</li>
+<li>修改分区类型的十六进制编码</li>
+<li>格式化交换分区</li>
+<li>启用交换分区</li>
+</ul>
+</li>
+<li>具体一点就是这样 ：<ul>
+<li>首先，直接对我们的第二块硬盘的6号分区下手好了<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912211620269.png" alt=""></li>
+<li>输入t修改分区类型，L查看类型编号<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912212430472.png" alt=""></li>
+<li>修改编号为82（swap分区），输入p确认一下，然后w保存<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180912212343350.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><ul>
+<li><strong>什么是用户和用户组？</strong><ul>
+<li>用户 ：使用操作系统的人</li>
+<li>用户组 ：在该系统中具有相同权限的用户们</li>
+</ul>
+</li>
+<li><strong>用户组信息 ：</strong><ul>
+<li>存储在 /etc/group 中</li>
+<li>让我们进入这个文件看一看 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-2018091117564760.png" alt=""></li>
+<li>那么被冒号隔开的四个属性分别是啥呢？<ul>
+<li>myGroup 组名称</li>
+<li>x 组密码占位符</li>
+<li>111 每个用户组的唯一编号</li>
+<li>aa,bb,cc 组中用户名列表</li>
+</ul>
+</li>
+<li>注意注意 ：<ul>
+<li>当组内只有一个用户，且用户名和组名相同时，组内用户名列表是可以直接省略掉的</li>
+<li>root用户组（即超级管理员用户组）的组号一定为0</li>
+<li>组号1-499属于系统预留的组标号（一般是预留给安装在该操作系统上的软件或服务的，比如说mySQL）</li>
+<li>用户手动创建的组编号是从500开始的</li>
+<li>组密码占位符固定为x</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>组密码信息 ：</strong><ul>
+<li>存储在 /etc/gshadow 中</li>
+<li>同样，让我们进去看一看这个文件 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180911185141383.png" alt=""></li>
+<li>这里的每段分别表示 ：<ul>
+<li>myGroup 组名称</li>
+<li><ul>
+<li>组密码（为*、!、或为空时，均表示组密码为空）</li>
+</ul>
+</li>
+<li>组管理者（为空时表示组内所有用户均可管理）</li>
+<li>aa,bb,cc 组内用户名列表</li>
+</ul>
+</li>
+<li>注意 ：<ul>
+<li>这里的行数与group中的行数相一致</li>
+<li>每行都与group中的该行一一对应</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>用户信息 ：</strong><ul>
+<li>存储在 /etc/passwd 中</li>
+<li>进去查看一下 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-20180911185746764.png" alt=""></li>
+<li>每段分别表示 ：<ul>
+<li>userName 用户名</li>
+<li>x 密码占位符</li>
+<li>111 用户编号</li>
+<li>222 用户组编号</li>
+<li>xxxxxxxxx 用户注释信息</li>
+<li>/home/userName 用户主目录</li>
+<li>/bin/bash shell类型</li>
+</ul>
+</li>
+<li>备注 ：<ul>
+<li>同样，每行是一一对应的</li>
+<li>其实不用管这么多啦</li>
+<li>稍微需要注意一点的是这个用户主目录，它是指系统为除root用户外的其他用户，在home目录下以该用户的用户名创建的一个，用来存放该用户个人文件的，目录</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>用户的密码信息 ：</strong><ul>
+<li>存储在 /etc/shadow 中</li>
+<li>查看一下 ：<br><img src="/2018/09/20/Linux第二弹/markdown-img-paste-2018091119053416.png" alt=""></li>
+<li>前两段分别为用户名和被加密过的密码</li>
+<li>后面就不用管了啦<del>（懒死你算了）</del></li>
+</ul>
+</li>
+<li><strong>用户和用户组的各种命令 ：</strong><ul>
+<li>不管了不管了 上链接！用啥查啥 万岁 ٩(๑&gt;◡&lt;๑)۶<br><a href="http://www.runoob.com/linux/linux-user-manage.html" target="_blank" rel="noopener">http://www.runoob.com/linux/linux-user-manage.html</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="又到了幸福的结尾时间"><a href="#又到了幸福的结尾时间" class="headerlink" title="又到了幸福的结尾时间"></a>又到了幸福的结尾时间</h2><ul>
+<li>就酱紫啦 先留个印象 有需要再说 嗯！</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux合集/">Linux合集</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/09/20/Linux第二弹/" data-title="Linux第二弹 | 啾啾子的小博客" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2018/09/20/Linux软件安装/" title="Linux软件安装">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Linux软件安装</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/09/20/Linux常用命令/"  title="Linux常用命令">
+ <strong>NEXT:</strong><br/> 
+ <span>Linux常用命令
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#VIM文本编辑器"><span class="toc-number">1.</span> <span class="toc-text">VIM文本编辑器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#磁盘管理"><span class="toc-number">2.</span> <span class="toc-text">磁盘管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户管理"><span class="toc-number">3.</span> <span class="toc-text">用户管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#又到了幸福的结尾时间"><span class="toc-number">4.</span> <span class="toc-text">又到了幸福的结尾时间</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/Linux合集/" title="Linux合集">Linux合集<sup>4</sup></a></li>
+		
+			<li><a href="/categories/工具向整理/" title="工具向整理">工具向整理<sup>3</sup></a></li>
+		
+			<li><a href="/categories/数据库系列/" title="数据库系列">数据库系列<sup>1</sup></a></li>
+		
+			<li><a href="/categories/纸上谈系列/" title="纸上谈系列">纸上谈系列<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/JSP/" title="JSP">JSP<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>4</sup></a></li>
+		
+			<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+		
+			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/idea/" title="idea">idea<sup>1</sup></a></li>
+		
+			<li><a href="/tags/maven/" title="maven">maven<sup>1</sup></a></li>
+		
+			<li><a href="/tags/netty/" title="netty">netty<sup>1</sup></a></li>
+		
+			<li><a href="/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+		
+			<li><a href="/tags/servlet/" title="servlet">servlet<sup>1</sup></a></li>
+		
+			<li><a href="/tags/webSocket/" title="webSocket">webSocket<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://a-limon.github.io/pacman/hello/introducing-pacman-theme/#" target="_blank" title="Pacman">Pacman</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 我们的目标是！ <br/>
+			早睡早起，不掉头发！</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com//" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com//" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/yuanLier" target="_blank" title="github"></a>
+		
+		
+		<a href="https://www.facebook.com//" target="_blank" title="facebook"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="yuanLier">yuanLier</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:""};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"position":"right","width":120,"height":240},"mobile":{"show":true},"log":false});</script></body>
+</html>

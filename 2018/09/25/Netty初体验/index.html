@@ -1,0 +1,540 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Netty初体验 | 啾啾子的小博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="yuanLier">
+    
+    <meta name="description" itemprop="description" content="假装看懂了系列.jpg">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="/" />
+    <meta name="twitter:title" content="Netty初体验 | 啾啾子的小博客" />
+      
+        <meta name="twitter:description" content="假装看懂了系列.jpg" />
+      
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="啾啾子的小博客" title="啾啾子的小博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="啾啾子的小博客">啾啾子的小博客</a></h1>
+				<h2 class="blog-motto">又名 啾啾子·不知道瞎写了些啥玩意·的小博客</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/09/25/Netty初体验/" title="Netty初体验" itemprop="url">Netty初体验</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="yuanLier">yuanLier</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2018-09-25T09:29:37.000Z" itemprop="datePublished">2018-09-25</time>
+    Updated:<time datetime="2018-10-05T10:04:40.718Z" itemprop="dateModified">2018-10-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Netty入门"><span class="toc-number">1.</span> <span class="toc-text">Netty入门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO通信"><span class="toc-number">2.</span> <span class="toc-text">IO通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Netty与原生NIO的对比"><span class="toc-number">3.</span> <span class="toc-text">Netty与原生NIO的对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WebSocket入门"><span class="toc-number">4.</span> <span class="toc-text">WebSocket入门</span></a></li></ol>
+		</div>
+		
+		<h2 id="Netty入门"><a href="#Netty入门" class="headerlink" title="Netty入门"></a>Netty入门</h2><ul>
+<li><strong>什么是Netty？</strong><ul>
+<li>是一个Java IO开源框架</li>
+<li>高性能事件驱动、异步非堵塞</li>
+<li>由JBoss提供，用于建立底层的TCP等连接</li>
+<li>可用来快速开发高性能客户端和网络服务器</li>
+<li>基于NIO的客户端，服务端编程框架</li>
+<li>提供了良好的稳定性和伸缩性</li>
+</ul>
+</li>
+<li><strong>Netty的使用场景</strong><ul>
+<li>高性能领域<ul>
+<li>游戏、大数据分布式计算等</li>
+</ul>
+</li>
+<li>多线程并发领域</li>
+<li>异步通信领域</li>
+</ul>
+</li>
+</ul>
+<h2 id="IO通信"><a href="#IO通信" class="headerlink" title="IO通信"></a>IO通信</h2><ul>
+<li><strong>BIO通信</strong><ul>
+<li>特点 ：<ul>
+<li>阻塞同步IO</li>
+<li>由一个线程负责连接</li>
+<li>一请求一应答模式</li>
+<li>缺乏弹性伸缩能力</li>
+</ul>
+</li>
+<li>简单来说差不多就是这样的 ：<br><img src="/2018/09/25/Netty初体验/markdown-img-paste-20180925084044556.png" alt=""></li>
+</ul>
+</li>
+<li><strong>伪异步IO通信</strong><ul>
+<li>特点 ：<ul>
+<li>阻塞同步IO</li>
+<li>由线程池负责连接</li>
+<li>M请求N应答模式</li>
+<li>可能造成线程池阻塞</li>
+</ul>
+</li>
+<li>图示 ：<br><img src="/2018/09/25/Netty初体验/markdown-img-paste-20180925084200170.png" alt=""></li>
+</ul>
+</li>
+<li><strong>NIO通信</strong><ul>
+<li>特点 ：<ul>
+<li>非阻塞同步IO</li>
+<li>通过缓冲区Buffer处理流数据</li>
+<li>由Channel读取或写入网络数据</li>
+<li>多路复用器Selector ：<ul>
+<li>若某个Channel上发生了读或写事件，则称为就绪状态</li>
+<li>Selector即负责不断轮询，以找到处于就绪状态的Channel们</li>
+<li>再通过SelectionKey获取就绪Channel的集合，以进行后续操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>通道与流的区别 ：<ul>
+<li>通道是双向的，流是单向的</li>
+<li>流只能在某一方向进行读操作或写操作</li>
+<li>但通道即能读又能写，甚至可以同时进行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>AIO通信</strong><ul>
+<li>特点 ：<ul>
+<li>非阻塞异步IO</li>
+<li>连接注册读写事件和回调函数</li>
+<li>读写方式异步</li>
+<li>主动通知程序</li>
+</ul>
+</li>
+<li>备注 ：<ul>
+<li>真正的异步非阻塞IO</li>
+<li>不需要通过Selector轮询即可实现异步读写</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Netty与原生NIO的对比"><a href="#Netty与原生NIO的对比" class="headerlink" title="Netty与原生NIO的对比"></a>Netty与原生NIO的对比</h2><ul>
+<li><strong>原生NIO ：</strong><ul>
+<li>类库和API繁杂</li>
+<li>入门门槛高</li>
+<li>工作量和难度大</li>
+<li>存在典型bug（如epoll空轮询等）</li>
+</ul>
+</li>
+<li><strong>Netty ：</strong><ul>
+<li>API简单，可扩展性强</li>
+<li>入门门槛低</li>
+<li>性能高</li>
+<li>成熟、稳定</li>
+</ul>
+</li>
+</ul>
+<h2 id="WebSocket入门"><a href="#WebSocket入门" class="headerlink" title="WebSocket入门"></a>WebSocket入门</h2><ul>
+<li><strong>什么是WebSocket？</strong><ul>
+<li>H5提出的协议规范</li>
+<li>基于握手机制来建立连接</li>
+<li>为解决客户端与服务器实时通信而产生</li>
+<li>本质上是一个基于ICP的协议，是通过HTTP/HTTPS协议发起一条特殊的HTTP请求，进行握手后创建一个用于交换数据的TCP连接；此后，服务端和客户端便可通过此TCP连接进行实时通信（就不需要之前那条进行握手请求的HTTP参与了）</li>
+</ul>
+</li>
+<li><strong>WebSocket特点 ：</strong><ul>
+<li>节省通信开销（因为轮询需要不断向服务器发送请求，而即使是只发送一条很小的信息，也必须把不短的HTTPRequestHeader完整送出，这样就会占用不必要的带宽和服务器资源）</li>
+<li>服务器主动传送数据给客户端</li>
+<li>实时通信</li>
+</ul>
+</li>
+<li><strong>WebSocket连接建立 ：</strong><ul>
+<li>客户端发起握手请求</li>
+<li>服务端响应请求</li>
+<li>建立连接</li>
+</ul>
+</li>
+<li><strong>WebSocket生命周期 ：</strong><ul>
+<li>打开(open)事件 ：<ul>
+<li>发生在新连接建立之时、其他事件发生之前</li>
+<li>伴随着三部分信息 ：webSocketSession对象（用于表示已经建立好的连接）、配置对象（包含了用来配置端点的信息），及一组路径参数（用来打开阶段握手时WebSocket端入站时匹配的URI）</li>
+</ul>
+</li>
+<li>消息(message)事件 ：<ul>
+<li>主要用来接收WebSocket对话中另一端发送的消息</li>
+<li>消息将以三种基本形式抵达 ：文本消息、二进制消息、Pong消息</li>
+<li>一般使用带String参数的方法处理文本消息；使用带Buffer或数组参数的方法处理二进制文本；使用PongMessage接口实例处理Pong消息</li>
+</ul>
+</li>
+<li>错误(error)事件 ：<ul>
+<li>在WebSocket连接或端点发生错误时产生</li>
+<li>可以处理WebSocket实现入站时发生的各种异常</li>
+<li>三种基本错误类型 ：WebSocket建立连接时 ：SessionException；试图将入站消息解码成开发人员所需要的对象时 ：DecodeExceptiom；由WebSocket端点产生的其他运行时错误等</li>
+</ul>
+</li>
+<li>关闭(close)事件 ：<ul>
+<li>可由参与连接的任意一个端点发出</li>
+<li>表示此次WebSocket连接关闭</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>WebSocket连接关闭 ：</strong><ul>
+<li>两种方式 ：<ul>
+<li>服务器关闭底层TCP连接（正常）</li>
+<li>客户端发起 TCP Close（异常）</li>
+</ul>
+</li>
+<li>所以说一般是由服务器发起TCP Close操作，客户端等待关闭就好</li>
+</ul>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/netty/">netty</a><a href="/tags/webSocket/">webSocket</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/纸上谈系列/">纸上谈系列</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2018/09/25/Netty初体验/" data-title="Netty初体验 | 啾啾子的小博客" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2018/10/05/Redis初体验/" title="Redis初体验">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Redis初体验</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/09/20/git指令整理/"  title="git指令整理">
+ <strong>NEXT:</strong><br/> 
+ <span>git指令整理
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Netty入门"><span class="toc-number">1.</span> <span class="toc-text">Netty入门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO通信"><span class="toc-number">2.</span> <span class="toc-text">IO通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Netty与原生NIO的对比"><span class="toc-number">3.</span> <span class="toc-text">Netty与原生NIO的对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WebSocket入门"><span class="toc-number">4.</span> <span class="toc-text">WebSocket入门</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/Linux合集/" title="Linux合集">Linux合集<sup>4</sup></a></li>
+		
+			<li><a href="/categories/工具向整理/" title="工具向整理">工具向整理<sup>3</sup></a></li>
+		
+			<li><a href="/categories/数据库系列/" title="数据库系列">数据库系列<sup>1</sup></a></li>
+		
+			<li><a href="/categories/纸上谈系列/" title="纸上谈系列">纸上谈系列<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/JSP/" title="JSP">JSP<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>4</sup></a></li>
+		
+			<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+		
+			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/idea/" title="idea">idea<sup>1</sup></a></li>
+		
+			<li><a href="/tags/maven/" title="maven">maven<sup>1</sup></a></li>
+		
+			<li><a href="/tags/netty/" title="netty">netty<sup>1</sup></a></li>
+		
+			<li><a href="/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+		
+			<li><a href="/tags/servlet/" title="servlet">servlet<sup>1</sup></a></li>
+		
+			<li><a href="/tags/webSocket/" title="webSocket">webSocket<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+      <li><a href="http://a-limon.github.io/pacman/hello/introducing-pacman-theme/#" target="_blank" title="Pacman">Pacman</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 我们的目标是！ <br/>
+			早睡早起，不掉头发！</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com//" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com//" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/yuanLier" target="_blank" title="github"></a>
+		
+		
+		<a href="https://www.facebook.com//" target="_blank" title="facebook"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="yuanLier">yuanLier</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:""};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"position":"right","width":120,"height":240},"mobile":{"show":true},"log":false});</script></body>
+</html>
